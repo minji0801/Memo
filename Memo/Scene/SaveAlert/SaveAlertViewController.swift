@@ -24,7 +24,10 @@ final class SaveAlertViewController: UIViewController {
     /// 경고 메시지 라벨
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "작성된 내용이 없습니다. 내용을 작성 한 후에 다시 시도해주세요."
+        label.text = """
+                    작성된 내용이 없습니다.
+                    내용을 작성 한 후에 다시 시도해주세요.
+                    """
         label.textAlignment = .center
         label.numberOfLines = 0
 

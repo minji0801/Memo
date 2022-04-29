@@ -29,6 +29,8 @@
 		A5E360EB281BE15E00EBE99C /* SaveAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360EA281BE15E00EBE99C /* SaveAlertPresenter.swift */; };
 		A5E360F1281BE53F00EBE99C /* 교보손글씨.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E360F0281BE53F00EBE99C /* 교보손글씨.otf */; };
 		A5E360F4281BE59C00EBE99C /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360F3281BE59C00EBE99C /* FontManager.swift */; };
+		A5E360F6281BEC4B00EBE99C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360F5281BEC4B00EBE99C /* UserDefaultsManager.swift */; };
+		A5E360F9281BECBA00EBE99C /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360F8281BECBA00EBE99C /* Memo.swift */; };
 		F9FBD07CD1EEE79CA091852E /* Pods_Memo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BDBA8AFB8FCE51989FDF92 /* Pods_Memo.framework */; };
 		FBC000C97A2DD9EAF81E81A9 /* Pods_MemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCCE0FC68530BE16084B7C6 /* Pods_MemoTests.framework */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,8 @@
 		A5E360EA281BE15E00EBE99C /* SaveAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAlertPresenter.swift; sourceTree = "<group>"; };
 		A5E360F0281BE53F00EBE99C /* 교보손글씨.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "교보손글씨.otf"; sourceTree = "<group>"; };
 		A5E360F3281BE59C00EBE99C /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		A5E360F5281BEC4B00EBE99C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		A5E360F8281BECBA00EBE99C /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		B242F028F95EC4ABEB92491F /* Pods-Memo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memo.release.xcconfig"; path = "Target Support Files/Pods-Memo/Pods-Memo.release.xcconfig"; sourceTree = "<group>"; };
 		B60E8D7155570412E4E48FB1 /* Pods_Memo_MemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memo_MemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC096DCAA5D6175908F70D35 /* Pods-MemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoTests.debug.xcconfig"; path = "Target Support Files/Pods-MemoTests/Pods-MemoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				A5E3609F281B996900EBE99C /* AppDelegate.swift */,
 				A5E360A1281B996900EBE99C /* SceneDelegate.swift */,
 				A5E360F2281BE59100EBE99C /* Manager */,
+				A5E360F7281BECAF00EBE99C /* Model */,
 				A5E360D3281B9DA600EBE99C /* Scene */,
 				A5E360ED281BE4FE00EBE99C /* Resource */,
 				A5E360A8281B996B00EBE99C /* Assets.xcassets */,
@@ -270,8 +275,17 @@
 			isa = PBXGroup;
 			children = (
 				A5E360F3281BE59C00EBE99C /* FontManager.swift */,
+				A5E360F5281BEC4B00EBE99C /* UserDefaultsManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		A5E360F7281BECAF00EBE99C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A5E360F8281BECBA00EBE99C /* Memo.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -505,6 +519,7 @@
 				A5E360DC281BABFF00EBE99C /* ListPopupPresenter.swift in Sources */,
 				A5E360A4281B996900EBE99C /* ListViewController.swift in Sources */,
 				A5E360F4281BE59C00EBE99C /* FontManager.swift in Sources */,
+				A5E360F9281BECBA00EBE99C /* Memo.swift in Sources */,
 				A5E360DA281BABE800EBE99C /* ListPopupViewController.swift in Sources */,
 				A5E360A0281B996900EBE99C /* AppDelegate.swift in Sources */,
 				A5E360E1281BAFA500EBE99C /* WritePresenter.swift in Sources */,
@@ -513,6 +528,7 @@
 				A5E360A2281B996900EBE99C /* SceneDelegate.swift in Sources */,
 				A5E360DF281BAF9D00EBE99C /* WriteViewController.swift in Sources */,
 				A5E360EB281BE15E00EBE99C /* SaveAlertPresenter.swift in Sources */,
+				A5E360F6281BEC4B00EBE99C /* UserDefaultsManager.swift in Sources */,
 				A5E360E6281BC14B00EBE99C /* DismissAlertPresenter.swift in Sources */,
 				A5E360E9281BE15600EBE99C /* SaveAlertViewController.swift in Sources */,
 				A5E360D5281BA44C00EBE99C /* ListTableViewCell.swift in Sources */,

@@ -155,7 +155,7 @@ extension WriteViewController {
 
     /// 체크 버튼 클릭 -> 저장하기
     @objc func didTappedRightBarButton() {
-        presenter.didTappedRightBarButton(textView.text.count)
+        presenter.didTappedRightBarButton(textView.text)
     }
 
     /// 키보드 보여질 때 받는 노티

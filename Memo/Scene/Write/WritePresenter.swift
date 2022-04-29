@@ -24,9 +24,14 @@ protocol WriteProtocol: AnyObject {
 
 final class WritePresenter: NSObject {
     private let viewController: WriteProtocol?
+    private let userDefaultsManager: UserDefaultsManagerProtol
 
-    init(viewController: WriteProtocol?) {
+    init(
+        viewController: WriteProtocol?,
+        userDefaultsManager: UserDefaultsManagerProtol = UserDefaultsManager()
+    ) {
         self.viewController = viewController
+        self.userDefaultsManager = userDefaultsManager
     }
 
     func viewDidLoad() {
@@ -44,9 +49,14 @@ final class WritePresenter: NSObject {
         }
     }
 
-    func didTappedRightBarButton(_ textCount: Int) {
+    func didTappedRightBarButton(_ content: String?) {
+        guard let content = content else { return }
+        let textCount = content.count
+        let id = userDefaultsManager.getMemoId()
+
         if textCount > 0 {
-            // 내용 저장
+            let memo: Memo = Memo(id: id, content: content, isSecret: false)
+            userDefaultsManager.setMemo(memo)
             viewController?.popToRootViewController()
         } else {
             viewController?.showSaveAlertViewController()

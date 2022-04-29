@@ -52,6 +52,7 @@ final class ListViewController: UIViewController {
 //            }
 //            print("---------------------")
 //        }
+        print(UserDefaultsManager().getMemos())
     }
 }
 
