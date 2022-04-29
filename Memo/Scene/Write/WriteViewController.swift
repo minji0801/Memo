@@ -21,11 +21,19 @@ final class WriteViewController: UIViewController {
     )
 
     /// 오른쪽 바 버튼: 작성 완료 버튼
-    private lazy var rightBarButton = UIBarButtonItem(
+    private lazy var saveRightBarButton = UIBarButtonItem(
         image: UIImage(systemName: "checkmark"),
         style: .plain,
         target: self,
-        action: #selector(didTappedRightBarButton)
+        action: #selector(didTappedSaveRightBarButton)
+    )
+
+    /// 오른쪽 바 버튼: 잠금 버튼
+    private lazy var lockRightBarButton = UIBarButtonItem(
+        image: UIImage(systemName: "lock"),
+        style: .plain,
+        target: self,
+        action: #selector(didTappedLockRightBarButton)
     )
 
     /// 메모 작성 뷰
@@ -51,6 +59,12 @@ final class WriteViewController: UIViewController {
 
         presenter.viewDidLoad()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        presenter.viewWillAppear()
+    }
 }
 
 // MARK: - ListProtocol Function
@@ -59,7 +73,7 @@ extension WriteViewController: WriteProtocol {
     func setupNavigationBar() {
         navigationItem.title = "메모 작성"
         navigationItem.leftBarButtonItem = leftBarButton
-        navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.rightBarButtonItems = [saveRightBarButton, lockRightBarButton]
     }
 
     func setupNoti() {
@@ -73,6 +87,12 @@ extension WriteViewController: WriteProtocol {
             self,
             selector: #selector(popViewNoti),
             name: NSNotification.Name("PopWriteViewController"),
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(inputPasswordNoti),
+            name: NSNotification.Name("InputPassword"),
             object: nil
         )
     }
@@ -131,6 +151,13 @@ extension WriteViewController: WriteProtocol {
         present(saveAlertViewController, animated: false)
     }
 
+    /// 암호 입력 Alert 보여주기
+    func showPasswordAlertViewController() {
+        let passwordAlertViewController = PasswordAlertViewController()
+        passwordAlertViewController.modalPresentationStyle = .overCurrentContext
+        present(passwordAlertViewController, animated: false)
+    }
+
     /// 키보드 높이만큼 올리기
     func keyboardHeightUp(_ keyboardHeight: CGFloat) {
         UIView.animate(withDuration: 1) {
@@ -144,6 +171,15 @@ extension WriteViewController: WriteProtocol {
     func updateTextCount(_ count: Int) {
         countLabel.text = "\(count)"
     }
+
+    /// 자물쇠 버튼 업데이트
+    func updateLockButton(_ isSecret: Bool) {
+        if isSecret {
+            lockRightBarButton.image = UIImage(systemName: "lock.fill")
+        } else {
+            lockRightBarButton.image = UIImage(systemName: "lock")
+        }
+    }
 }
 
 // MARK: - @objc Function
@@ -154,8 +190,13 @@ extension WriteViewController {
     }
 
     /// 체크 버튼 클릭 -> 저장하기
-    @objc func didTappedRightBarButton() {
-        presenter.didTappedRightBarButton(textView.text)
+    @objc func didTappedSaveRightBarButton() {
+        presenter.didTappedSaveRightBarButton(textView.text)
+    }
+
+    /// 자물쇠 버튼 클릭 -> 비밀 메모 설정
+    @objc func didTappedLockRightBarButton() {
+        presenter.didTappedLockRightBarButton()
     }
 
     /// 키보드 보여질 때 받는 노티
@@ -164,8 +205,13 @@ extension WriteViewController {
     }
 
     /// 현재 뷰 pop하라는 노티
-    @objc func popViewNoti() {
+    @objc func popViewNoti(_ notification: Notification) {
         textView.text = ""
         presenter.didTappedLeftBarButton(textView.text.count)
+    }
+
+    /// 암호 입력했다는 노티
+    @objc func inputPasswordNoti(_ notification: Notification) {
+        presenter.inputPasswordNoti(notification)
     }
 }

@@ -13,10 +13,13 @@ final class ListTableViewCell: UITableViewCell {
     func update(_ memo: Memo) {
         let font = FontManager.getFont()
         textLabel?.font = font.mediumFont
-        textLabel?.text = memo.content
 
         if memo.isSecret {
             imageView?.image = UIImage(systemName: "lock.fill")
+            textLabel?.text = "비밀 메모입니다."
+        } else {
+            imageView?.image = nil
+            textLabel?.text = memo.content
         }
     }
 }

@@ -69,6 +69,7 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
         ) as? ListTableViewCell else { return UITableViewCell() }
 
         let memo = memos[indexPath.row]
+        print(indexPath.row, memo.isSecret)
         cell.update(memo)
 
         return cell
