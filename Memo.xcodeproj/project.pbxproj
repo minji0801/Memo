@@ -23,6 +23,8 @@
 		A5E360DC281BABFF00EBE99C /* ListPopupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360DB281BABFF00EBE99C /* ListPopupPresenter.swift */; };
 		A5E360DF281BAF9D00EBE99C /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360DE281BAF9D00EBE99C /* WriteViewController.swift */; };
 		A5E360E1281BAFA500EBE99C /* WritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360E0281BAFA500EBE99C /* WritePresenter.swift */; };
+		A5E360E4281BC12300EBE99C /* DismissAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360E3281BC12300EBE99C /* DismissAlertViewController.swift */; };
+		A5E360E6281BC14B00EBE99C /* DismissAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360E5281BC14B00EBE99C /* DismissAlertPresenter.swift */; };
 		F9FBD07CD1EEE79CA091852E /* Pods_Memo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BDBA8AFB8FCE51989FDF92 /* Pods_Memo.framework */; };
 		FBC000C97A2DD9EAF81E81A9 /* Pods_MemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCCE0FC68530BE16084B7C6 /* Pods_MemoTests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,8 @@
 		A5E360DB281BABFF00EBE99C /* ListPopupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPopupPresenter.swift; sourceTree = "<group>"; };
 		A5E360DE281BAF9D00EBE99C /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		A5E360E0281BAFA500EBE99C /* WritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePresenter.swift; sourceTree = "<group>"; };
+		A5E360E3281BC12300EBE99C /* DismissAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAlertViewController.swift; sourceTree = "<group>"; };
+		A5E360E5281BC14B00EBE99C /* DismissAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAlertPresenter.swift; sourceTree = "<group>"; };
 		B242F028F95EC4ABEB92491F /* Pods-Memo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memo.release.xcconfig"; path = "Target Support Files/Pods-Memo/Pods-Memo.release.xcconfig"; sourceTree = "<group>"; };
 		B60E8D7155570412E4E48FB1 /* Pods_Memo_MemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memo_MemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC096DCAA5D6175908F70D35 /* Pods-MemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoTests.debug.xcconfig"; path = "Target Support Files/Pods-MemoTests/Pods-MemoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 				A5E360D2281B9DA100EBE99C /* List */,
 				A5E360DD281BAC0800EBE99C /* ListPopup */,
 				A5E360E2281BAFA900EBE99C /* Write */,
+				A5E360E7281BC60200EBE99C /* DismissAlert */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -214,6 +219,15 @@
 				A5E360E0281BAFA500EBE99C /* WritePresenter.swift */,
 			);
 			path = Write;
+			sourceTree = "<group>";
+		};
+		A5E360E7281BC60200EBE99C /* DismissAlert */ = {
+			isa = PBXGroup;
+			children = (
+				A5E360E3281BC12300EBE99C /* DismissAlertViewController.swift */,
+				A5E360E5281BC14B00EBE99C /* DismissAlertPresenter.swift */,
+			);
+			path = DismissAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,8 +463,10 @@
 				A5E360A0281B996900EBE99C /* AppDelegate.swift in Sources */,
 				A5E360E1281BAFA500EBE99C /* WritePresenter.swift in Sources */,
 				A5E360D1281B9D9E00EBE99C /* ListPresenter.swift in Sources */,
+				A5E360E4281BC12300EBE99C /* DismissAlertViewController.swift in Sources */,
 				A5E360A2281B996900EBE99C /* SceneDelegate.swift in Sources */,
 				A5E360DF281BAF9D00EBE99C /* WriteViewController.swift in Sources */,
+				A5E360E6281BC14B00EBE99C /* DismissAlertPresenter.swift in Sources */,
 				A5E360D5281BA44C00EBE99C /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

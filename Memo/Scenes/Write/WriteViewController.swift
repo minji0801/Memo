@@ -70,6 +70,12 @@ extension WriteViewController: WriteProtocol {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(popViewNoti),
+            name: NSNotification.Name("PopWriteViewController"),
+            object: nil
+        )
     }
 
     /// 뷰 구성
@@ -96,7 +102,13 @@ extension WriteViewController: WriteProtocol {
 
     /// 현재 뷰 pop
     func popViewController() {
-        navigationController?.popViewController(animated: true)
+        if textView.text.count > 0 {
+            let dismissAlertViewController = DismissAlertViewController()
+            dismissAlertViewController.modalPresentationStyle = .overCurrentContext
+            present(dismissAlertViewController, animated: false)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 
     /// 키보드 높이만큼 올리기
@@ -124,5 +136,10 @@ extension WriteViewController {
 
     @objc func willShowKeyBoard(_ notification: Notification) {
         presenter.willShowKeyBoard(notification)
+    }
+
+    @objc func popViewNoti() {
+        textView.text = ""
+        presenter.didTappedLeftBarButton()
     }
 }
