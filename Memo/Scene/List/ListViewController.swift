@@ -52,7 +52,12 @@ final class ListViewController: UIViewController {
 //            }
 //            print("---------------------")
 //        }
-        print(UserDefaultsManager().getMemos())
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        presenter.viewWillAppear()
     }
 }
 
@@ -79,6 +84,11 @@ extension ListViewController: ListProtocol {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+
+    /// 테이블 뷰 다시 로드하기
+    func reloadTableView() {
+        tableView.reloadData()
     }
 
     /// 메모 작성 화면 보여주기

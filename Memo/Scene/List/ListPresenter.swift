@@ -11,19 +11,33 @@ import UIKit
 protocol ListProtocol: AnyObject {
     func setupNavigationBar()
     func setupView()
+
+    func reloadTableView()
     func pushToWriteViewController()
 }
 
 final class ListPresenter: NSObject {
     private let viewController: ListProtocol?
+    private let userDefaultsManager: UserDefaultsManagerProtol
 
-    init(viewController: ListProtocol?) {
+    private var memos: [Memo] = []
+
+    init(
+        viewController: ListProtocol?,
+        userDefaultsManager: UserDefaultsManagerProtol = UserDefaultsManager()
+    ) {
         self.viewController = viewController
+        self.userDefaultsManager = userDefaultsManager
     }
 
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupView()
+    }
+
+    func viewWillAppear() {
+        memos = userDefaultsManager.getMemos()
+        viewController?.reloadTableView()
     }
 
     func didTappedRightBarButton() {
@@ -45,7 +59,7 @@ extension ListPresenter: UISearchBarDelegate, UISearchControllerDelegate {
 extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
     /// 행 개수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return memos.count
     }
 
     /// 셀 구성
@@ -54,8 +68,14 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
             withIdentifier: ListTableViewCell.identifier
         ) as? ListTableViewCell else { return UITableViewCell() }
 
-        cell.update(indexPath.row)
+        let memo = memos[indexPath.row]
+        cell.update(memo)
 
         return cell
+    }
+
+    /// 행 높이
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
 }

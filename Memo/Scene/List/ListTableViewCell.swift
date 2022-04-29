@@ -10,20 +10,12 @@ import UIKit
 final class ListTableViewCell: UITableViewCell {
     static let identifier = "ListTableViewCell"
 
-    let testMemo = [
-        "오늘은 치과를 다녀왔다. 크라운 치료를 받는데 너무 힘들었다.. 아직 아무것도 못먹었다..ㅠ",
-        "비밀메모 입니다.",
-        "먹킷리스트 육회, 햄버거, 뿌링클, 초밥, 스테이크"
-    ]
-
-    let testSecret = [false, true, false]
-
-    func update(_ row: Int) {
+    func update(_ memo: Memo) {
         let font = FontManager.getFont()
         textLabel?.font = font.mediumFont
-        textLabel?.text = testMemo[row]
+        textLabel?.text = memo.content
 
-        if testSecret[row] {
+        if memo.isSecret {
             imageView?.image = UIImage(systemName: "lock.fill")
         }
     }
