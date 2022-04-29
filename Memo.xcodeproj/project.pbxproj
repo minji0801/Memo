@@ -27,6 +27,8 @@
 		A5E360E6281BC14B00EBE99C /* DismissAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360E5281BC14B00EBE99C /* DismissAlertPresenter.swift */; };
 		A5E360E9281BE15600EBE99C /* SaveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360E8281BE15600EBE99C /* SaveAlertViewController.swift */; };
 		A5E360EB281BE15E00EBE99C /* SaveAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360EA281BE15E00EBE99C /* SaveAlertPresenter.swift */; };
+		A5E360F1281BE53F00EBE99C /* 교보손글씨.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E360F0281BE53F00EBE99C /* 교보손글씨.otf */; };
+		A5E360F4281BE59C00EBE99C /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360F3281BE59C00EBE99C /* FontManager.swift */; };
 		F9FBD07CD1EEE79CA091852E /* Pods_Memo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BDBA8AFB8FCE51989FDF92 /* Pods_Memo.framework */; };
 		FBC000C97A2DD9EAF81E81A9 /* Pods_MemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCCE0FC68530BE16084B7C6 /* Pods_MemoTests.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +78,8 @@
 		A5E360E5281BC14B00EBE99C /* DismissAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAlertPresenter.swift; sourceTree = "<group>"; };
 		A5E360E8281BE15600EBE99C /* SaveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAlertViewController.swift; sourceTree = "<group>"; };
 		A5E360EA281BE15E00EBE99C /* SaveAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAlertPresenter.swift; sourceTree = "<group>"; };
+		A5E360F0281BE53F00EBE99C /* 교보손글씨.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "교보손글씨.otf"; sourceTree = "<group>"; };
+		A5E360F3281BE59C00EBE99C /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		B242F028F95EC4ABEB92491F /* Pods-Memo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memo.release.xcconfig"; path = "Target Support Files/Pods-Memo/Pods-Memo.release.xcconfig"; sourceTree = "<group>"; };
 		B60E8D7155570412E4E48FB1 /* Pods_Memo_MemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memo_MemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC096DCAA5D6175908F70D35 /* Pods-MemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoTests.debug.xcconfig"; path = "Target Support Files/Pods-MemoTests/Pods-MemoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -161,7 +165,9 @@
 			children = (
 				A5E3609F281B996900EBE99C /* AppDelegate.swift */,
 				A5E360A1281B996900EBE99C /* SceneDelegate.swift */,
-				A5E360D3281B9DA600EBE99C /* Scenes */,
+				A5E360F2281BE59100EBE99C /* Manager */,
+				A5E360D3281B9DA600EBE99C /* Scene */,
+				A5E360ED281BE4FE00EBE99C /* Resource */,
 				A5E360A8281B996B00EBE99C /* Assets.xcassets */,
 				A5E360AA281B996B00EBE99C /* LaunchScreen.storyboard */,
 				A5E360AD281B996B00EBE99C /* Info.plist */,
@@ -196,7 +202,7 @@
 			path = List;
 			sourceTree = "<group>";
 		};
-		A5E360D3281B9DA600EBE99C /* Scenes */ = {
+		A5E360D3281B9DA600EBE99C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
 				A5E360D2281B9DA100EBE99C /* List */,
@@ -205,7 +211,7 @@
 				A5E360E7281BC60200EBE99C /* DismissAlert */,
 				A5E360EC281BE16500EBE99C /* SaveAlert */,
 			);
-			path = Scenes;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		A5E360DD281BAC0800EBE99C /* ListPopup */ = {
@@ -242,6 +248,30 @@
 				A5E360EA281BE15E00EBE99C /* SaveAlertPresenter.swift */,
 			);
 			path = SaveAlert;
+			sourceTree = "<group>";
+		};
+		A5E360ED281BE4FE00EBE99C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A5E360EF281BE52300EBE99C /* Font */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		A5E360EF281BE52300EBE99C /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A5E360F0281BE53F00EBE99C /* 교보손글씨.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		A5E360F2281BE59100EBE99C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A5E360F3281BE59C00EBE99C /* FontManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5E360AC281B996B00EBE99C /* LaunchScreen.storyboard in Resources */,
+				A5E360F1281BE53F00EBE99C /* 교보손글씨.otf in Resources */,
 				A5E360A9281B996B00EBE99C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,6 +504,7 @@
 			files = (
 				A5E360DC281BABFF00EBE99C /* ListPopupPresenter.swift in Sources */,
 				A5E360A4281B996900EBE99C /* ListViewController.swift in Sources */,
+				A5E360F4281BE59C00EBE99C /* FontManager.swift in Sources */,
 				A5E360DA281BABE800EBE99C /* ListPopupViewController.swift in Sources */,
 				A5E360A0281B996900EBE99C /* AppDelegate.swift in Sources */,
 				A5E360E1281BAFA500EBE99C /* WritePresenter.swift in Sources */,
