@@ -41,6 +41,7 @@ final class ListPopupViewController: UIViewController {
 
 // MARK: - ListPopupProtocol Function
 extension ListPopupViewController: ListPopupProtocol {
+    /// 뷰 구성
     func setupView() {
         view.backgroundColor = .systemBackground
 

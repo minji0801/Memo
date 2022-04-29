@@ -11,6 +11,7 @@ import UIKit
 protocol ListProtocol: AnyObject {
     func setupNavigationBar()
     func setupView()
+    func pushToWriteViewController()
 }
 
 final class ListPresenter: NSObject {
@@ -23,6 +24,10 @@ final class ListPresenter: NSObject {
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupView()
+    }
+
+    func didTappedRightBarButton() {
+        viewController?.pushToWriteViewController()
     }
 }
 

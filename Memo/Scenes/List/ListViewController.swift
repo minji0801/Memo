@@ -27,26 +27,6 @@ final class ListViewController: UIViewController {
         action: #selector(didTappedRightBarButton)
     )
 
-    /// 검색 창
-    private lazy var searchcontroller: UISearchController = {
-        let searchController = UISearchController()
-        searchController.searchBar.placeholder = "메모 검색"
-
-        searchController.searchBar.keyboardType = .default
-        searchController.searchBar.autocorrectionType = .no
-        searchController.searchBar.spellCheckingType = .no
-        searchController.searchBar.autocapitalizationType = .none
-
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.showsCancelButton = false
-
-        searchController.searchBar.delegate = presenter
-        searchController.delegate = presenter
-
-        return searchController
-    }()
-
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = presenter
@@ -69,12 +49,14 @@ final class ListViewController: UIViewController {
 
 // MARK: - ListProtocol Function
 extension ListViewController: ListProtocol {
+    /// 네비게이션 바 구성
     func setupNavigationBar() {
-        navigationItem.title = "메모"
+        navigationItem.title = "메모 목록"
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
     }
 
+    /// 뷰 구성
     func setupView() {
         view.backgroundColor = .systemBackground
 
@@ -83,6 +65,12 @@ extension ListViewController: ListProtocol {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+
+    /// 메모 작성 화면 보여주기
+    func pushToWriteViewController() {
+        let writeViewController = WriteViewController()
+        navigationController?.pushViewController(writeViewController, animated: true)
     }
 }
 
@@ -101,7 +89,9 @@ extension ListViewController {
         }
     }
 
-    @objc func didTappedRightBarButton() {}
+    @objc func didTappedRightBarButton() {
+        presenter.didTappedRightBarButton()
+    }
 }
 
 // MARK: - UIPopoverPresentationControllerDelegate
