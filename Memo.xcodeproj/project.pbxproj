@@ -33,6 +33,10 @@
 		A5E360F9281BECBA00EBE99C /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360F8281BECBA00EBE99C /* Memo.swift */; };
 		A5E360FD281BF7FE00EBE99C /* PasswordAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360FC281BF7FE00EBE99C /* PasswordAlertViewController.swift */; };
 		A5E360FF281BF80600EBE99C /* PasswordAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360FE281BF80600EBE99C /* PasswordAlertPresenter.swift */; };
+		A5EDCFA3281C289300C128FE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDCFA2281C289300C128FE /* DetailViewController.swift */; };
+		A5EDCFA5281C28A400C128FE /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDCFA4281C28A400C128FE /* DetailPresenter.swift */; };
+		A5EDCFA8281C2B7400C128FE /* DetailPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDCFA7281C2B7400C128FE /* DetailPopupViewController.swift */; };
+		A5EDCFAA281C2B7D00C128FE /* DetailPopupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDCFA9281C2B7D00C128FE /* DetailPopupPresenter.swift */; };
 		F9FBD07CD1EEE79CA091852E /* Pods_Memo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BDBA8AFB8FCE51989FDF92 /* Pods_Memo.framework */; };
 		FBC000C97A2DD9EAF81E81A9 /* Pods_MemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCCE0FC68530BE16084B7C6 /* Pods_MemoTests.framework */; };
 /* End PBXBuildFile section */
@@ -88,6 +92,10 @@
 		A5E360F8281BECBA00EBE99C /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		A5E360FC281BF7FE00EBE99C /* PasswordAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordAlertViewController.swift; sourceTree = "<group>"; };
 		A5E360FE281BF80600EBE99C /* PasswordAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordAlertPresenter.swift; sourceTree = "<group>"; };
+		A5EDCFA2281C289300C128FE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A5EDCFA4281C28A400C128FE /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		A5EDCFA7281C2B7400C128FE /* DetailPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopupViewController.swift; sourceTree = "<group>"; };
+		A5EDCFA9281C2B7D00C128FE /* DetailPopupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopupPresenter.swift; sourceTree = "<group>"; };
 		B242F028F95EC4ABEB92491F /* Pods-Memo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memo.release.xcconfig"; path = "Target Support Files/Pods-Memo/Pods-Memo.release.xcconfig"; sourceTree = "<group>"; };
 		B60E8D7155570412E4E48FB1 /* Pods_Memo_MemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memo_MemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC096DCAA5D6175908F70D35 /* Pods-MemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoTests.debug.xcconfig"; path = "Target Support Files/Pods-MemoTests/Pods-MemoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -218,6 +226,8 @@
 				A5E360D2281B9DA100EBE99C /* List */,
 				A5E360DD281BAC0800EBE99C /* ListPopup */,
 				A5E360E2281BAFA900EBE99C /* Write */,
+				A5EDCFA6281C2B6400C128FE /* Detail */,
+				A5EDCFAB281C2B8300C128FE /* DetailPopup */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -308,6 +318,24 @@
 				A5E360FE281BF80600EBE99C /* PasswordAlertPresenter.swift */,
 			);
 			path = PasswordAlert;
+			sourceTree = "<group>";
+		};
+		A5EDCFA6281C2B6400C128FE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				A5EDCFA2281C289300C128FE /* DetailViewController.swift */,
+				A5EDCFA4281C28A400C128FE /* DetailPresenter.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		A5EDCFAB281C2B8300C128FE /* DetailPopup */ = {
+			isa = PBXGroup;
+			children = (
+				A5EDCFA7281C2B7400C128FE /* DetailPopupViewController.swift */,
+				A5EDCFA9281C2B7D00C128FE /* DetailPopupPresenter.swift */,
+			);
+			path = DetailPopup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,6 +569,7 @@
 				A5E360DC281BABFF00EBE99C /* ListPopupPresenter.swift in Sources */,
 				A5E360A4281B996900EBE99C /* ListViewController.swift in Sources */,
 				A5E360FD281BF7FE00EBE99C /* PasswordAlertViewController.swift in Sources */,
+				A5EDCFA5281C28A400C128FE /* DetailPresenter.swift in Sources */,
 				A5E360F4281BE59C00EBE99C /* FontManager.swift in Sources */,
 				A5E360F9281BECBA00EBE99C /* Memo.swift in Sources */,
 				A5E360DA281BABE800EBE99C /* ListPopupViewController.swift in Sources */,
@@ -548,8 +577,11 @@
 				A5E360E1281BAFA500EBE99C /* WritePresenter.swift in Sources */,
 				A5E360D1281B9D9E00EBE99C /* ListPresenter.swift in Sources */,
 				A5E360E4281BC12300EBE99C /* DismissAlertViewController.swift in Sources */,
+				A5EDCFA3281C289300C128FE /* DetailViewController.swift in Sources */,
 				A5E360A2281B996900EBE99C /* SceneDelegate.swift in Sources */,
 				A5E360DF281BAF9D00EBE99C /* WriteViewController.swift in Sources */,
+				A5EDCFAA281C2B7D00C128FE /* DetailPopupPresenter.swift in Sources */,
+				A5EDCFA8281C2B7400C128FE /* DetailPopupViewController.swift in Sources */,
 				A5E360FF281BF80600EBE99C /* PasswordAlertPresenter.swift in Sources */,
 				A5E360EB281BE15E00EBE99C /* SaveAlertPresenter.swift in Sources */,
 				A5E360F6281BEC4B00EBE99C /* UserDefaultsManager.swift in Sources */,

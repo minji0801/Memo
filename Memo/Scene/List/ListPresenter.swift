@@ -14,6 +14,8 @@ protocol ListProtocol: AnyObject {
 
     func reloadTableView()
     func pushToWriteViewController()
+    func pushToDetailViewController(_ memo: Memo)
+    func showListPopupViewController(_ popoverContentController: ListPopupViewController)
 }
 
 final class ListPresenter: NSObject {
@@ -40,6 +42,19 @@ final class ListPresenter: NSObject {
         viewController?.reloadTableView()
     }
 
+    func didTappedLeftBarButton(_ sender: UIBarButtonItem) {
+        let popoverContentController = ListPopupViewController()
+        popoverContentController.modalPresentationStyle = .popover
+        popoverContentController.preferredContentSize = CGSize(width: 80, height: 100)
+
+        if let popoverPresentationController = popoverContentController.popoverPresentationController {
+            popoverPresentationController.permittedArrowDirections = .right
+            popoverPresentationController.barButtonItem = sender
+            popoverPresentationController.delegate = self
+            viewController?.showListPopupViewController(popoverContentController)
+        }
+    }
+
     func didTappedRightBarButton() {
         viewController?.pushToWriteViewController()
     }
@@ -62,14 +77,13 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
         return memos.count
     }
 
-    /// 셀 구성
+    /// 행 구성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: ListTableViewCell.identifier
         ) as? ListTableViewCell else { return UITableViewCell() }
 
         let memo = memos[indexPath.row]
-        print(indexPath.row, memo.isSecret)
         cell.update(memo)
 
         return cell
@@ -78,5 +92,31 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
     /// 행 높이
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
+    }
+
+    /// 행 클릭
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let memo = memos[indexPath.row]
+        viewController?.pushToDetailViewController(memo)
+    }
+}
+
+// MARK: - UIPopoverPresentationControllerDelegate
+extension ListPresenter: UIPopoverPresentationControllerDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    func popoverPresentationControllerDidDismissPopover(
+        _ popoverPresentationController: UIPopoverPresentationController
+    ) {
+
+    }
+
+    func popoverPresentationControllerShouldDismissPopover(
+        _ popoverPresentationController: UIPopoverPresentationController
+    ) -> Bool {
+        return true
     }
 }

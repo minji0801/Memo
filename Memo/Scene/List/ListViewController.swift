@@ -96,44 +96,26 @@ extension ListViewController: ListProtocol {
         let writeViewController = WriteViewController()
         navigationController?.pushViewController(writeViewController, animated: true)
     }
+
+    /// 메모 상세 화면 보여주기
+    func pushToDetailViewController(_ memo: Memo) {
+        let detailViewController = DetailViewController(memo: memo)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
+    /// 팝업 메뉴 보여주기
+    func showListPopupViewController(_ popoverContentController: ListPopupViewController) {
+        present(popoverContentController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - @objc Function
 extension ListViewController {
     @objc func didTappedLeftBarButton(_ sender: UIBarButtonItem) {
-        let popoverContentController = ListPopupViewController()
-        popoverContentController.modalPresentationStyle = .popover
-        popoverContentController.preferredContentSize = CGSize(width: 80, height: 100)
-
-        if let popoverPresentationController = popoverContentController.popoverPresentationController {
-            popoverPresentationController.permittedArrowDirections = .right
-            popoverPresentationController.barButtonItem = sender
-            popoverPresentationController.delegate = self
-            present(popoverContentController, animated: true, completion: nil)
-        }
+        presenter.didTappedLeftBarButton(sender)
     }
 
     @objc func didTappedRightBarButton() {
         presenter.didTappedRightBarButton()
-    }
-}
-
-// MARK: - UIPopoverPresentationControllerDelegate
-extension ListViewController: UIPopoverPresentationControllerDelegate {
-
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-
-    func popoverPresentationControllerDidDismissPopover(
-        _ popoverPresentationController: UIPopoverPresentationController
-    ) {
-
-    }
-
-    func popoverPresentationControllerShouldDismissPopover(
-        _ popoverPresentationController: UIPopoverPresentationController
-    ) -> Bool {
-        return true
     }
 }

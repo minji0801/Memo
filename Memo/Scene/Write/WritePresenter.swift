@@ -47,10 +47,6 @@ final class WritePresenter: NSObject {
         viewController?.applyFont()
     }
 
-    func viewWillAppear() {
-        print("비밀메모인가?", isSecret, "암호 :", password)
-    }
-
     func didTappedLeftBarButton(_ textCount: Int) {
         if textCount > 0 {
             viewController?.showDismissAlertViewController()
