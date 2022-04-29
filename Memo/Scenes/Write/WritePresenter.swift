@@ -14,6 +14,9 @@ protocol WriteProtocol: AnyObject {
     func setupView()
 
     func popViewController()
+    func popToRootViewController()
+    func showDismissAlertViewController()
+    func showSaveAlertViewController()
     func keyboardHeightUp(_ keyboardHeight: CGFloat)
     func updateTextCount(_ count: Int)
 }
@@ -31,8 +34,21 @@ final class WritePresenter: NSObject {
         viewController?.setupView()
     }
 
-    func didTappedLeftBarButton() {
-        viewController?.popViewController()
+    func didTappedLeftBarButton(_ textCount: Int) {
+        if textCount > 0 {
+            viewController?.showDismissAlertViewController()
+        } else {
+            viewController?.popViewController()
+        }
+    }
+
+    func didTappedRightBarButton(_ textCount: Int) {
+        if textCount > 0 {
+            // 내용 저장
+            viewController?.popToRootViewController()
+        } else {
+            viewController?.showSaveAlertViewController()
+        }
     }
 
     func willShowKeyBoard(_ notification: Notification) {

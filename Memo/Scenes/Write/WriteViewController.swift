@@ -102,13 +102,26 @@ extension WriteViewController: WriteProtocol {
 
     /// 현재 뷰 pop
     func popViewController() {
-        if textView.text.count > 0 {
-            let dismissAlertViewController = DismissAlertViewController()
-            dismissAlertViewController.modalPresentationStyle = .overCurrentContext
-            present(dismissAlertViewController, animated: false)
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
+        navigationController?.popViewController(animated: true)
+    }
+
+    /// root 뷰로 pop
+    func popToRootViewController() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
+    /// 내용이 있을 때 정말 닫을 건지 Alert 창 보여주기
+    func showDismissAlertViewController() {
+        let dismissAlertViewController = DismissAlertViewController()
+        dismissAlertViewController.modalPresentationStyle = .overCurrentContext
+        present(dismissAlertViewController, animated: false)
+    }
+
+    /// 내용을 작성하고 저장해달라는 Alert 창 보여주기
+    func showSaveAlertViewController() {
+        let saveAlertViewController = SaveAlertViewController()
+        saveAlertViewController.modalPresentationStyle = .overCurrentContext
+        present(saveAlertViewController, animated: false)
     }
 
     /// 키보드 높이만큼 올리기
@@ -128,18 +141,24 @@ extension WriteViewController: WriteProtocol {
 
 // MARK: - @objc Function
 extension WriteViewController {
+    /// 뒤로 가기 버튼 클릭 -> pop
     @objc func didTappedLeftBarButton() {
-        presenter.didTappedLeftBarButton()
+        presenter.didTappedLeftBarButton(textView.text.count)
     }
 
-    @objc func didTappedRightBarButton() {}
+    /// 체크 버튼 클릭 -> 저장하기
+    @objc func didTappedRightBarButton() {
+        presenter.didTappedRightBarButton(textView.text.count)
+    }
 
+    /// 키보드 보여질 때 받는 노티
     @objc func willShowKeyBoard(_ notification: Notification) {
         presenter.willShowKeyBoard(notification)
     }
 
+    /// 현재 뷰 pop하라는 노티
     @objc func popViewNoti() {
         textView.text = ""
-        presenter.didTappedLeftBarButton()
+        presenter.didTappedLeftBarButton(textView.text.count)
     }
 }
