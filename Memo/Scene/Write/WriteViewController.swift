@@ -10,7 +10,16 @@ import SnapKit
 import UIKit
 
 final class WriteViewController: UIViewController {
-    private lazy var presenter = WritePresenter(viewController: self)
+    private var presenter: WritePresenter!
+
+    init(isEditing: Bool, memo: Memo) {
+        super.init(nibName: nil, bundle: nil)
+        presenter = WritePresenter(viewController: self, isEditing: isEditing, memo: memo)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     /// 왼쪽 바 버튼: 뒤로가기 버튼
     private lazy var leftBarButton = UIBarButtonItem(
@@ -92,8 +101,13 @@ extension WriteViewController: WriteProtocol {
     }
 
     /// 뷰 구성
-    func setupView() {
+    func setupView(_ isEditing: Bool, _ memo: Memo) {
         view.backgroundColor = .systemBackground
+
+        if isEditing {
+            textView.text = memo.content
+            countLabel.text = "\(memo.content.count)"
+        }
 
         [textView, countLabel].forEach {
             view.addSubview($0)
@@ -119,11 +133,6 @@ extension WriteViewController: WriteProtocol {
 
         textView.font = font.largeFont
         countLabel.font = font.mediumFont
-    }
-
-    /// 현재 뷰 pop
-    func popViewController() {
-        navigationController?.popViewController(animated: true)
     }
 
     /// root 뷰로 pop

@@ -95,7 +95,7 @@ extension ListViewController: ListProtocol {
 
     /// 메모 작성 화면 보여주기
     func pushToWriteViewController() {
-        let writeViewController = WriteViewController()
+        let writeViewController = WriteViewController(isEditing: false, memo: Memo.EMPTY)
         navigationController?.pushViewController(writeViewController, animated: true)
     }
 

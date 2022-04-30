@@ -16,6 +16,7 @@ protocol DetailProtocol: AnyObject {
 
     func popViewController()
     func showDetailPopupViewController(_ popoverContentController: DetailPopupViewController)
+    func pushToWriteViewController()
     func showDeleteAlertViewController()
 }
 
@@ -23,7 +24,7 @@ final class DetailPresenter: NSObject {
     private let viewController: DetailProtocol?
     private let userDefaultsManager: UserDefaultsManagerProtol
 
-    private var memo: Memo
+    var memo: Memo
 
     init(
         viewController: DetailProtocol?,
@@ -60,7 +61,7 @@ final class DetailPresenter: NSObject {
     }
 
     func didTappedEditNoti() {
-        // 수정화면으로 넘어가기
+        viewController?.pushToWriteViewController()
     }
 
     func didTappedDeleteNoti() {
@@ -69,7 +70,6 @@ final class DetailPresenter: NSObject {
 
     func deleteMemoNoti() {
         let id = memo.id
-        print("id가 \(id)인 메모 삭제하세요!")
         userDefaultsManager.deleteMemo(id)
         viewController?.popViewController()
     }

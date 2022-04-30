@@ -139,9 +139,9 @@ extension DetailViewController: DetailProtocol {
         present(popoverContentController, animated: true, completion: nil)
     }
 
-    /// 수정(작성)화면 push
+    /// 메모 수정 화면 push
     func pushToWriteViewController() {
-        let writeViewController = WriteViewController()
+        let writeViewController = WriteViewController(isEditing: true, memo: presenter.memo)
         navigationController?.pushViewController(writeViewController, animated: true)
     }
 

@@ -11,10 +11,9 @@ import UIKit
 protocol WriteProtocol: AnyObject {
     func setupNavigationBar()
     func setupNoti()
-    func setupView()
+    func setupView(_ isEditing: Bool, _ memo: Memo)
     func applyFont()
 
-    func popViewController()
     func popToRootViewController()
     func showDismissAlertViewController()
     func showSaveAlertViewController()
@@ -29,21 +28,25 @@ final class WritePresenter: NSObject {
     private let viewController: WriteProtocol?
     private let userDefaultsManager: UserDefaultsManagerProtol
 
-    private var password: String = ""
-    private var isSecret: Bool = false
+    private var isEditing: Bool
+    private var memo: Memo
 
     init(
         viewController: WriteProtocol?,
-        userDefaultsManager: UserDefaultsManagerProtol = UserDefaultsManager()
+        userDefaultsManager: UserDefaultsManagerProtol = UserDefaultsManager(),
+        isEditing: Bool,
+        memo: Memo
     ) {
         self.viewController = viewController
         self.userDefaultsManager = userDefaultsManager
+        self.isEditing = isEditing
+        self.memo = memo
     }
 
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupNoti()
-        viewController?.setupView()
+        viewController?.setupView(isEditing, memo)
         viewController?.applyFont()
     }
 
@@ -51,7 +54,7 @@ final class WritePresenter: NSObject {
         if textCount > 0 {
             viewController?.showDismissAlertViewController()
         } else {
-            viewController?.popViewController()
+            viewController?.popToRootViewController()
         }
     }
 
@@ -61,20 +64,31 @@ final class WritePresenter: NSObject {
         if content.isEmpty {
             viewController?.showSaveAlertViewController()
         } else {
-            let id = userDefaultsManager.getMemoId()
-            let memo: Memo = Memo(id: id, content: content, password: password, isSecret: isSecret)
-            userDefaultsManager.setMemo(memo)
-            userDefaultsManager.setMemoId()
+            var id: Int
+            if isEditing {
+                id = memo.id
+            } else {
+                id = userDefaultsManager.getMemoId()
+            }
+
+            let memo: Memo = Memo(id: id, content: content, password: memo.password, isSecret: memo.isSecret)
+
+            if isEditing {
+                userDefaultsManager.editMemo(id, memo)
+            } else {
+                userDefaultsManager.setMemo(memo)
+                userDefaultsManager.setMemoId()
+            }
             viewController?.popToRootViewController()
         }
     }
 
     func didTappedLockRightBarButton() {
-        if isSecret {
+        if memo.isSecret {
             // 이미 비밀 메모로 설정했으니까 일반 메모로 바꾸기
-            isSecret = false
-            password = ""
-            viewController?.updateLockButton(isSecret)
+            memo.isSecret = false
+            memo.password = ""
+            viewController?.updateLockButton(memo.isSecret)
         } else {
             // 일반 메모에서 비밀메모로 바꾸기
             viewController?.showPasswordAlertViewController()
@@ -92,9 +106,9 @@ final class WritePresenter: NSObject {
     func inputPasswordNoti(_ notification: Notification) {
         guard let object = notification.object as? String else { return }
 
-        password = object
-        isSecret = true
-        viewController?.updateLockButton(isSecret)
+        memo.password = object
+        memo.isSecret = true
+        viewController?.updateLockButton(memo.isSecret)
     }
 }
 

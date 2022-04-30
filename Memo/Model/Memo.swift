@@ -10,7 +10,7 @@ import Foundation
 struct Memo: Codable {
     let id: Int             // 아이디
     let content: String     // 메모 내용
-    let password: String    // 암호
+    var password: String    // 암호
     var isSecret: Bool      // 비밀메모인지
 
     init(
