@@ -91,6 +91,12 @@ extension DetailViewController: DetailProtocol {
         )
     }
 
+    /// 제스처 등록
+    func setupGesture() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(didTappedLeftBarButton))
+        view.addGestureRecognizer(swipeLeft)
+    }
+
     /// 뷰 구성
     func setupView(_ memo: Memo) {
         view.backgroundColor = .systemBackground
@@ -102,16 +108,6 @@ extension DetailViewController: DetailProtocol {
         }
 
         textView.text = memo.content
-
-        let attrString = NSMutableAttributedString(string: textView.text!)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 10
-        attrString.addAttribute(
-            NSAttributedString.Key.paragraphStyle,
-            value: paragraphStyle,
-            range: NSMakeRange(0, attrString.length)
-        )
-        textView.attributedText = attrString
 
         view.addSubview(textView)
 
@@ -157,6 +153,8 @@ extension DetailViewController: DetailProtocol {
         var style = ToastStyle()
         style.messageAlignment = .center
         style.messageFont = FontManager.getFont().largeFont
+        style.messageColor = .systemBackground
+        style.backgroundColor = .label
 
         if isSecret {
             view.makeToast("수정 화면에서 일반 메모로 변경하실 수 있습니다.", style: style)

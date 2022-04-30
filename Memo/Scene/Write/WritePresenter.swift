@@ -11,6 +11,7 @@ import UIKit
 protocol WriteProtocol: AnyObject {
     func setupNavigationBar()
     func setupNoti()
+    func setupGesture()
     func setupView(_ isEditing: Bool, _ memo: Memo)
     func applyFont()
 
@@ -46,6 +47,7 @@ final class WritePresenter: NSObject {
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupNoti()
+        viewController?.setupGesture()
         viewController?.setupView(isEditing, memo)
         viewController?.applyFont()
     }

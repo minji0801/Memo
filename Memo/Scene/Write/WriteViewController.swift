@@ -100,6 +100,12 @@ extension WriteViewController: WriteProtocol {
         )
     }
 
+    /// 제스처 등록
+    func setupGesture() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(didTappedLeftBarButton))
+        view.addGestureRecognizer(swipeLeft)
+    }
+
     /// 뷰 구성
     func setupView(_ isEditing: Bool, _ memo: Memo) {
         view.backgroundColor = .systemBackground

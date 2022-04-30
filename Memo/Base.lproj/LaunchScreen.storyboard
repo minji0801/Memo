@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="memo_icon" translatesAutoresizingMaskIntoConstraints="NO" id="HLw-RQ-kYa">
-                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <rect key="frame" x="157" y="398" width="100" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="B8B-MO-2nb"/>
+                                    <constraint firstAttribute="width" constant="100" id="B8B-MO-2nb"/>
                                     <constraint firstAttribute="width" secondItem="HLw-RQ-kYa" secondAttribute="height" multiplier="1:1" id="Cfb-mW-Aep"/>
                                 </constraints>
                             </imageView>

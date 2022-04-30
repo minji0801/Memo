@@ -11,6 +11,7 @@ import UIKit
 protocol DetailProtocol: AnyObject {
     func setupNavigationBar()
     func setupNoti()
+    func setupGesture()
     func setupView(_ memo: Memo)
     func applyFont()
 
@@ -40,6 +41,7 @@ final class DetailPresenter: NSObject {
     func viewDidLoad() {
         viewController?.setupNavigationBar()
         viewController?.setupNoti()
+        viewController?.setupGesture()
         viewController?.setupView(memo)
         viewController?.applyFont()
     }
