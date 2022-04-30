@@ -19,6 +19,7 @@ protocol ListProtocol: AnyObject {
     func pushToDetailViewController(_ memo: Memo)
     func showListPopupViewController(_ popoverContentController: ListPopupViewController)
     func showPasswordAlertViewController(_ memo: Memo)
+    func showDeleteAlertViewController()
 }
 
 final class ListPresenter: NSObject {
@@ -27,6 +28,8 @@ final class ListPresenter: NSObject {
 
     private var memos: [Memo] = []
     private var searchText: String = ""
+
+    private var clickedMemoId: Int = -1
 
     init(
         viewController: ListProtocol?,
@@ -73,6 +76,11 @@ final class ListPresenter: NSObject {
 
         viewController?.pushToDetailViewController(memo)
     }
+
+    func deleteMemoNoti() {
+        userDefaultsManager.deleteMemo(clickedMemoId)
+        viewWillAppear()
+    }
 }
 
 // MARK: - UISearchController
@@ -116,6 +124,7 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
     /// 행 클릭
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let memo = memos[indexPath.row]
+
         if memo.isSecret {
             viewController?.showPasswordAlertViewController(memo)
         }
@@ -125,6 +134,26 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
     /// 스크롤 시작될 때
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         viewController?.keyboardDown()
+    }
+
+    /// 행 삭제
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let memo = memos[indexPath.row]
+        clickedMemoId = memo.id
+
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, _ in
+            guard let self = self else { return }
+            self.viewController?.showDeleteAlertViewController()
+        }
+
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        deleteAction.image?.withTintColor(.white)
+        deleteAction.backgroundColor = .systemRed
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
     }
 }
 

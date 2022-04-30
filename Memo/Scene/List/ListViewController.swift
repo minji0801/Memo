@@ -64,8 +64,6 @@ final class ListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         presenter.viewWillAppear()
-        print(UserDefaultsManager().getMemos())
-        print(UserDefaultsManager().getMemoId())
     }
 }
 
@@ -88,6 +86,12 @@ extension ListViewController: ListProtocol {
             self,
             selector: #selector(showMemoNoti(_:)),
             name: NSNotification.Name("ShowMemo"),
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(deleteMemoNoti(_:)),
+            name: NSNotification.Name("DeleteMemo"),
             object: nil
         )
     }
@@ -144,6 +148,13 @@ extension ListViewController: ListProtocol {
         passwordAlertViewController.modalPresentationStyle = .overCurrentContext
         present(passwordAlertViewController, animated: false)
     }
+
+    /// 메모 삭제 Alert 창 보여주기
+    func showDeleteAlertViewController() {
+        let deleteAlertViewController = DeleteAlertViewController()
+        deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+        present(deleteAlertViewController, animated: false)
+    }
 }
 
 // MARK: - @objc Function
@@ -156,5 +167,10 @@ extension ListViewController {
     /// 메모 보여주라는 노티 -> 클릭한 메모 보여주기
     @objc func showMemoNoti(_ notification: Notification) {
         presenter.showMemoNoti(notification)
+    }
+
+    /// 메모 삭제하라는 노티 -> 메모 삭제
+    @objc func deleteMemoNoti(_ notification: Notification) {
+        presenter.deleteMemoNoti()
     }
 }
