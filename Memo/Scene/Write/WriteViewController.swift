@@ -107,6 +107,7 @@ extension WriteViewController: WriteProtocol {
         if isEditing {
             textView.text = memo.content
             countLabel.text = "\(memo.content.count)"
+            updateLockButton(memo.isSecret)
         }
 
         [textView, countLabel].forEach {
