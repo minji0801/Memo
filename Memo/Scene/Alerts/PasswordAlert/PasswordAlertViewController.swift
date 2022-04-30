@@ -10,7 +10,16 @@ import SnapKit
 import UIKit
 
 final class PasswordAlertViewController: UIViewController {
-    private lazy var presenter = PasswordAlertPresenter(viewController: self)
+    private var presenter: PasswordAlertPresenter!
+
+    init(isChecking: Bool, memo: Memo) {
+        super.init(nibName: nil, bundle: nil)
+        presenter = PasswordAlertPresenter(viewController: self, isChecking: isChecking, memo: memo)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     /// Alert 창 뷰
     private lazy var alertView: UIView = {
@@ -80,8 +89,12 @@ final class PasswordAlertViewController: UIViewController {
 
 extension PasswordAlertViewController: PasswordAlertProtocol {
     /// 뷰 구성
-    func setupView() {
+    func setupView(_ isChecking: Bool) {
         view.backgroundColor = .black.withAlphaComponent(0.5)
+
+        if isChecking {
+            messageLabel.text = "잠긴 메모를 보려면 암호를 입력해주세요."
+        }
 
         let buttonStackView = UIStackView(arrangedSubviews: [cancelButton, confirmButton])
         buttonStackView.axis = .horizontal
@@ -102,7 +115,7 @@ extension PasswordAlertViewController: PasswordAlertProtocol {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(200.0)
             $0.width.equalTo(250.0)
-            $0.height.equalTo(150.0)
+            $0.height.equalTo(180.0)
         }
 
         alertStackView.snp.makeConstraints {
@@ -130,8 +143,16 @@ extension PasswordAlertViewController: PasswordAlertProtocol {
     }
 
     /// 메시지 라벨 업데이트
-    func updateMessageLabel() {
-        messageLabel.text = "암호를 입력해주세요."
+    func updateMessageLabel(isEmpty: Bool) {
+        if isEmpty {
+            messageLabel.text = "암호를 입력해주세요."
+        } else {
+            messageLabel.text = """
+                                암호가 올바르지 않습니다.
+                                다시 시도해주세요.
+                                """
+            passwordTextField.text = ""
+        }
         messageLabel.textColor = .systemRed
     }
 }

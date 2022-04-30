@@ -9,21 +9,30 @@ import Foundation
 import UIKit
 
 protocol PasswordAlertProtocol: AnyObject {
-    func setupView()
+    func setupView(_ isChecking: Bool)
     func applyFont()
     func dismiss()
-    func updateMessageLabel()
+    func updateMessageLabel(isEmpty: Bool)
 }
 
 final class PasswordAlertPresenter: NSObject {
     private let viewController: PasswordAlertProtocol?
 
-    init(viewController: PasswordAlertProtocol?) {
+    private var isChecking: Bool
+    private var memo: Memo
+
+    init(
+        viewController: PasswordAlertProtocol?,
+        isChecking: Bool,
+        memo: Memo
+    ) {
         self.viewController = viewController
+        self.isChecking = isChecking
+        self.memo = memo
     }
 
     func viewDidLoad() {
-        viewController?.setupView()
+        viewController?.setupView(isChecking)
         viewController?.applyFont()
     }
 
@@ -35,10 +44,19 @@ final class PasswordAlertPresenter: NSObject {
         guard let password = password else { return }
 
         if password.isEmpty {
-            viewController?.updateMessageLabel()
+            viewController?.updateMessageLabel(isEmpty: true)
         } else {
-            viewController?.dismiss()
-            NotificationCenter.default.post(name: NSNotification.Name("InputPassword"), object: password)
+            if isChecking {
+                if password == memo.password {
+                    viewController?.dismiss()
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowMemo"), object: memo)
+                } else {
+                    viewController?.updateMessageLabel(isEmpty: false)
+                }
+            } else {
+                viewController?.dismiss()
+                NotificationCenter.default.post(name: NSNotification.Name("InputPassword"), object: password)
+            }
         }
     }
 }

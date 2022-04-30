@@ -11,6 +11,8 @@ final class ListTableViewCell: UITableViewCell {
     static let identifier = "ListTableViewCell"
 
     func update(_ memo: Memo) {
+        selectionStyle = .none
+
         let font = FontManager.getFont()
         textLabel?.font = font.mediumFont
 

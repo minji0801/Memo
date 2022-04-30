@@ -77,6 +77,16 @@ extension ListViewController: ListProtocol {
         ]
     }
 
+    /// 노티 구성
+    func setupNoti() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(showMemoNoti(_:)),
+            name: NSNotification.Name("ShowMemo"),
+            object: nil
+        )
+    }
+
     /// 뷰 구성
     func setupView() {
         view.backgroundColor = .systemBackground
@@ -109,15 +119,29 @@ extension ListViewController: ListProtocol {
     func showListPopupViewController(_ popoverContentController: ListPopupViewController) {
         present(popoverContentController, animated: true, completion: nil)
     }
+
+    /// 암호 입력 Alert 창 보여주기
+    func showPasswordAlertViewController(_ memo: Memo) {
+        let passwordAlertViewController = PasswordAlertViewController(isChecking: true, memo: memo)
+        passwordAlertViewController.modalPresentationStyle = .overCurrentContext
+        present(passwordAlertViewController, animated: false)
+    }
 }
 
 // MARK: - @objc Function
 extension ListViewController {
+    /// 메뉴 버튼 클릭 -> 메뉴(검색, 설정) 보여주기
     @objc func didTappedLeftBarButton(_ sender: UIBarButtonItem) {
         presenter.didTappedLeftBarButton(sender)
     }
 
+    /// 메모 작성 버튼 클릭 -> 작성 화면으로 이동하기
     @objc func didTappedRightBarButton() {
         presenter.didTappedRightBarButton()
+    }
+
+    /// 메모 보여주라는 노티 -> 클릭한 메모 보여주기
+    @objc func showMemoNoti(_ notification: Notification) {
+        presenter.showMemoNoti(notification)
     }
 }

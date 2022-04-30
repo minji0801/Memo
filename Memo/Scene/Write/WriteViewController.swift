@@ -156,7 +156,7 @@ extension WriteViewController: WriteProtocol {
 
     /// 암호 입력 Alert 보여주기
     func showPasswordAlertViewController() {
-        let passwordAlertViewController = PasswordAlertViewController()
+        let passwordAlertViewController = PasswordAlertViewController(isChecking: false, memo: Memo.EMPTY)
         passwordAlertViewController.modalPresentationStyle = .overCurrentContext
         present(passwordAlertViewController, animated: false)
     }

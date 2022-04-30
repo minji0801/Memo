@@ -10,12 +10,14 @@ import UIKit
 
 protocol ListProtocol: AnyObject {
     func setupNavigationBar()
+    func setupNoti()
     func setupView()
 
     func reloadTableView()
     func pushToWriteViewController()
     func pushToDetailViewController(_ memo: Memo)
     func showListPopupViewController(_ popoverContentController: ListPopupViewController)
+    func showPasswordAlertViewController(_ memo: Memo)
 }
 
 final class ListPresenter: NSObject {
@@ -34,6 +36,7 @@ final class ListPresenter: NSObject {
 
     func viewDidLoad() {
         viewController?.setupNavigationBar()
+        viewController?.setupNoti()
         viewController?.setupView()
     }
 
@@ -57,6 +60,12 @@ final class ListPresenter: NSObject {
 
     func didTappedRightBarButton() {
         viewController?.pushToWriteViewController()
+    }
+
+    func showMemoNoti(_ notification: Notification) {
+        guard let memo = notification.object as? Memo else { return }
+
+        viewController?.pushToDetailViewController(memo)
     }
 }
 
@@ -97,6 +106,9 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
     /// 행 클릭
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let memo = memos[indexPath.row]
+        if memo.isSecret {
+            viewController?.showPasswordAlertViewController(memo)
+        }
         viewController?.pushToDetailViewController(memo)
     }
 }
