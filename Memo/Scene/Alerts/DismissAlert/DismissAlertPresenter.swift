@@ -11,7 +11,6 @@ protocol DismissAlertProtocol: AnyObject {
     func setupView()
     func applyFont()
     func dismiss()
-    func postPopNoti()
 }
 
 final class DismissAlertPresenter: NSObject {
@@ -31,7 +30,8 @@ final class DismissAlertPresenter: NSObject {
     }
 
     func didTappedYesButton() {
-        viewController?.postPopNoti()
         viewController?.dismiss()
+        NotificationCenter.default.post(
+            name: NSNotification.Name("PopViewController"),  object: nil)
     }
 }

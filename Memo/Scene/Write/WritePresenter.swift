@@ -64,6 +64,7 @@ final class WritePresenter: NSObject {
             let id = userDefaultsManager.getMemoId()
             let memo: Memo = Memo(id: id, content: content, password: password, isSecret: isSecret)
             userDefaultsManager.setMemo(memo)
+            userDefaultsManager.setMemoId()
             viewController?.popToRootViewController()
         }
     }

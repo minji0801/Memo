@@ -10,6 +10,7 @@ import Foundation
 protocol UserDefaultsManagerProtol {
     func getMemos() -> [Memo]
     func setMemo(_ newValue: Memo)
+    func deleteMemo(_ id: Int)
     func getMemoId() -> Int
     func setMemoId()
 }
@@ -30,6 +31,15 @@ final class UserDefaultsManager: UserDefaultsManagerProtol {
     func setMemo(_ newValue: Memo) {
         var currentMemos: [Memo] = getMemos()
         currentMemos.insert(newValue, at: 0)
+        UserDefaults.standard.setValue(try? PropertyListEncoder().encode(currentMemos), forKey: Key.memo.rawValue)
+    }
+
+    /// 메모 삭제하기
+    func deleteMemo(_ id: Int) {
+        var currentMemos: [Memo] = getMemos()
+        currentMemos.indices.filter { currentMemos[$0].id == id }.forEach {
+            currentMemos.remove(at: $0)
+        }
         UserDefaults.standard.setValue(try? PropertyListEncoder().encode(currentMemos), forKey: Key.memo.rawValue)
     }
 

@@ -16,18 +16,22 @@ protocol DetailProtocol: AnyObject {
 
     func popViewController()
     func showDetailPopupViewController(_ popoverContentController: DetailPopupViewController)
+    func showDeleteAlertViewController()
 }
 
 final class DetailPresenter: NSObject {
     private let viewController: DetailProtocol?
+    private let userDefaultsManager: UserDefaultsManagerProtol
 
     private var memo: Memo
 
     init(
         viewController: DetailProtocol?,
+        userDefaultsManager: UserDefaultsManagerProtol = UserDefaultsManager(),
         memo: Memo
     ) {
         self.viewController = viewController
+        self.userDefaultsManager = userDefaultsManager
         self.memo = memo
     }
 
@@ -60,7 +64,14 @@ final class DetailPresenter: NSObject {
     }
 
     func didTappedDeleteNoti() {
-        // Alert창 보여주기
+        viewController?.showDeleteAlertViewController()
+    }
+
+    func deleteMemoNoti() {
+        let id = memo.id
+        print("id가 \(id)인 메모 삭제하세요!")
+        userDefaultsManager.deleteMemo(id)
+        viewController?.popViewController()
     }
 }
 
@@ -83,4 +94,3 @@ extension DetailPresenter: UIPopoverPresentationControllerDelegate {
         return true
     }
 }
-

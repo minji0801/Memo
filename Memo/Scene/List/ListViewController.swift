@@ -58,6 +58,8 @@ final class ListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         presenter.viewWillAppear()
+        print(UserDefaultsManager().getMemos())
+        print(UserDefaultsManager().getMemoId())
     }
 }
 

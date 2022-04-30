@@ -80,7 +80,7 @@ extension WriteViewController: WriteProtocol {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(popViewNoti),
-            name: NSNotification.Name("PopWriteViewController"),
+            name: NSNotification.Name("PopViewController"),
             object: nil
         )
         NotificationCenter.default.addObserver(

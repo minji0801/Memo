@@ -82,6 +82,12 @@ extension DetailViewController: DetailProtocol {
             name: NSNotification.Name("DidTappedDelete"),
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(deleteMemoNoti(_:)),
+            name: NSNotification.Name("DeleteMemo"),
+            object: nil
+        )
     }
 
     /// 뷰 구성
@@ -141,7 +147,9 @@ extension DetailViewController: DetailProtocol {
 
     /// 메모 삭제 Alert 보여주기
     func showDeleteAlertViewController() {
-//
+        let deleteAlertViewController = DeleteAlertViewController()
+        deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+        present(deleteAlertViewController, animated: false)
     }
 }
 
@@ -157,13 +165,18 @@ extension DetailViewController {
         presenter.didTappedMenuRightBarButton(sender)
     }
 
+    /// 팝업에서 편집 버튼 눌렀다는 노티 -> 수정(작성) 화면으로 이동
     @objc func didTappedEditNoti(_ notification: Notification) {
-        print("didTappedEdit")
         presenter.didTappedEditNoti()
     }
 
+    /// 팝업에서 삭제 버튼 눌렀다는 노티 -> 삭제 Alert 창 보여주기
     @objc func didTappedDeleteNoti(_ notification: Notification) {
-        print("didTappedDelete")
         presenter.didTappedDeleteNoti()
+    }
+
+    /// 메모 삭제하라는 노티 -> 메모 삭제
+    @objc func deleteMemoNoti(_ notification: Notification) {
+        presenter.deleteMemoNoti()
     }
 }

@@ -37,8 +37,8 @@ final class PasswordAlertPresenter: NSObject {
         if password.isEmpty {
             viewController?.updateMessageLabel()
         } else {
-            NotificationCenter.default.post(name: NSNotification.Name("InputPassword"), object: password)
             viewController?.dismiss()
+            NotificationCenter.default.post(name: NSNotification.Name("InputPassword"), object: password)
         }
     }
 }

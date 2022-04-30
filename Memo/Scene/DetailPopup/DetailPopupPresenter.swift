@@ -26,12 +26,12 @@ final class DetailPopupPresenter: NSObject {
     }
 
     func didTappedEditButton() {
-        NotificationCenter.default.post(name: NSNotification.Name("DidTappedEdit"), object: nil)
         viewController?.dismiss()
+        NotificationCenter.default.post(name: NSNotification.Name("DidTappedEdit"), object: nil)
     }
 
     func didTappedDeleteButton() {
-        NotificationCenter.default.post(name: NSNotification.Name("DidTappedDelete"), object: nil)
         viewController?.dismiss()
+        NotificationCenter.default.post(name: NSNotification.Name("DidTappedDelete"), object: nil)
     }
 }

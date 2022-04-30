@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		979FBFCB19A04463DFED0C08 /* Pods_Memo_MemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B60E8D7155570412E4E48FB1 /* Pods_Memo_MemoUITests.framework */; };
+		A5D29D9D281CE5DD00A2BDE9 /* DeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D29D9C281CE5DD00A2BDE9 /* DeleteAlertViewController.swift */; };
+		A5D29D9F281CE5E800A2BDE9 /* DeleteAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D29D9E281CE5E800A2BDE9 /* DeleteAlertPresenter.swift */; };
 		A5E360A0281B996900EBE99C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3609F281B996900EBE99C /* AppDelegate.swift */; };
 		A5E360A2281B996900EBE99C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360A1281B996900EBE99C /* SceneDelegate.swift */; };
 		A5E360A4281B996900EBE99C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360A3281B996900EBE99C /* ListViewController.swift */; };
@@ -64,6 +66,8 @@
 		84EAD94D0FB7341ED470FD07 /* Pods-Memo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memo.debug.xcconfig"; path = "Target Support Files/Pods-Memo/Pods-Memo.debug.xcconfig"; sourceTree = "<group>"; };
 		90BDBA8AFB8FCE51989FDF92 /* Pods_Memo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CE008EE0A2D2560BAA2426B /* Pods-MemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoTests.release.xcconfig"; path = "Target Support Files/Pods-MemoTests/Pods-MemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		A5D29D9C281CE5DD00A2BDE9 /* DeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertViewController.swift; sourceTree = "<group>"; };
+		A5D29D9E281CE5E800A2BDE9 /* DeleteAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertPresenter.swift; sourceTree = "<group>"; };
 		A5E3609C281B996900EBE99C /* Memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E3609F281B996900EBE99C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5E360A1281B996900EBE99C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +156,15 @@
 				9CE008EE0A2D2560BAA2426B /* Pods-MemoTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A5D29DA0281CE5EB00A2BDE9 /* DeleteAlert */ = {
+			isa = PBXGroup;
+			children = (
+				A5D29D9C281CE5DD00A2BDE9 /* DeleteAlertViewController.swift */,
+				A5D29D9E281CE5E800A2BDE9 /* DeleteAlertPresenter.swift */,
+			);
+			path = DeleteAlert;
 			sourceTree = "<group>";
 		};
 		A5E36093281B996900EBE99C = {
@@ -304,8 +317,9 @@
 		A5E360FA281BF7E300EBE99C /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				A5E360FB281BF7EE00EBE99C /* PasswordAlert */,
+				A5D29DA0281CE5EB00A2BDE9 /* DeleteAlert */,
 				A5E360E7281BC60200EBE99C /* DismissAlert */,
+				A5E360FB281BF7EE00EBE99C /* PasswordAlert */,
 				A5E360EC281BE16500EBE99C /* SaveAlert */,
 			);
 			path = Alerts;
@@ -573,6 +587,8 @@
 				A5E360F4281BE59C00EBE99C /* FontManager.swift in Sources */,
 				A5E360F9281BECBA00EBE99C /* Memo.swift in Sources */,
 				A5E360DA281BABE800EBE99C /* ListPopupViewController.swift in Sources */,
+				A5D29D9D281CE5DD00A2BDE9 /* DeleteAlertViewController.swift in Sources */,
+				A5D29D9F281CE5E800A2BDE9 /* DeleteAlertPresenter.swift in Sources */,
 				A5E360A0281B996900EBE99C /* AppDelegate.swift in Sources */,
 				A5E360E1281BAFA500EBE99C /* WritePresenter.swift in Sources */,
 				A5E360D1281B9D9E00EBE99C /* ListPresenter.swift in Sources */,

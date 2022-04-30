@@ -1,16 +1,16 @@
 //
-//  WriteCancelAlertViewController.swift
+//  DeleteAlertViewController.swift
 //  Memo
 //
-//  Created by 김민지 on 2022/04/29.
-//  메모 작성 취소 경고창
+//  Created by 김민지 on 2022/04/30.
+//  메모 삭제 화면
 
 import Foundation
 import SnapKit
 import UIKit
 
-final class DismissAlertViewController: UIViewController {
-    private lazy var presenter = DismissAlertPresenter(viewController: self)
+final class DeleteAlertViewController: UIViewController {
+    private lazy var presenter = DeleteAlertPresenter(viewController: self)
 
     /// 경고 창 뷰
     private lazy var alertView: UIView = {
@@ -25,8 +25,8 @@ final class DismissAlertViewController: UIViewController {
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.text = """
-                    작성 중인 내용이 있습니다.
-                    정말 나가시겠습니까?
+                    정말 삭제하시겠습니까?
+                    (삭제 후 내용을 복원할 수 없습니다)
                     """
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -34,22 +34,22 @@ final class DismissAlertViewController: UIViewController {
         return label
     }()
 
-    /// 아니요 버튼
-    private lazy var noButton: UIButton = {
+    /// 취소 버튼
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("아니요", for: .normal)
+        button.setTitle("취소", for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
-        button.addTarget(self, action: #selector(didTappedNoButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTappedCancelButton), for: .touchUpInside)
 
         return button
     }()
 
-    /// 네 버튼
-    private lazy var yesButton: UIButton = {
+    /// 삭제 버튼
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("네", for: .normal)
+        button.setTitle("삭제", for: .normal)
         button.setTitleColor(UIColor.systemRed, for: .normal)
-        button.addTarget(self, action: #selector(didTappedYesButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTappedDeleteButton), for: .touchUpInside)
 
         return button
     }()
@@ -62,12 +62,12 @@ final class DismissAlertViewController: UIViewController {
 }
 
 // MARK: - DismissAlertProtocol Function
-extension DismissAlertViewController: DismissAlertProtocol {
+extension DeleteAlertViewController: DeleteAlertProtocol {
     /// 뷰 구성
     func setupView() {
         view.backgroundColor = .black.withAlphaComponent(0.5)
 
-        let buttonStackView = UIStackView(arrangedSubviews: [noButton, yesButton])
+        let buttonStackView = UIStackView(arrangedSubviews: [cancelButton, deleteButton])
         buttonStackView.axis = .horizontal
         buttonStackView.alignment = .fill
         buttonStackView.distribution = .fillEqually
@@ -97,8 +97,8 @@ extension DismissAlertViewController: DismissAlertProtocol {
         let font = FontManager.getFont()
 
         messageLabel.font = font.largeFont
-        noButton.titleLabel?.font = font.largeFont
-        yesButton.titleLabel?.font = font.largeFont
+        cancelButton.titleLabel?.font = font.largeFont
+        deleteButton.titleLabel?.font = font.largeFont
     }
 
     /// 화면 닫기
@@ -108,14 +108,14 @@ extension DismissAlertViewController: DismissAlertProtocol {
 }
 
 // MARK: - @objc Function
-extension DismissAlertViewController {
-    /// 아니요 버튼 클릭
-    @objc func didTappedNoButton() {
-        presenter.didTappedNoButton()
+extension DeleteAlertViewController {
+    /// 취소 버튼 클릭
+    @objc func didTappedCancelButton() {
+        presenter.didTappedCancelButton()
     }
 
-    /// 네 버튼 클릭
-    @objc func didTappedYesButton() {
-        presenter.didTappedYesButton()
+    /// 삭제 버튼 클릭
+    @objc func didTappedDeleteButton() {
+        presenter.didTappedDeleteButton()
     }
 }
