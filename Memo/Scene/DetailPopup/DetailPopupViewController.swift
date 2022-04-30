@@ -12,10 +12,10 @@ import UIKit
 final class DetailPopupViewController: UIViewController {
     private lazy var presenter = DetailPopupPresenter(viewController: self)
 
-    /// 편집 버튼
+    /// 수정 버튼
     private lazy var editButton: UIButton = {
         let button = UIButton()
-        button.setTitle("편집", for: .normal)
+        button.setTitle("수정", for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
         button.addTarget(self, action: #selector(didTappedEditButton), for: .touchUpInside)
 

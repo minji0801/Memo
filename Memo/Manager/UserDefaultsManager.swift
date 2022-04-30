@@ -36,7 +36,7 @@ final class UserDefaultsManager: UserDefaultsManagerProtol {
         UserDefaults.standard.setValue(try? PropertyListEncoder().encode(currentMemos), forKey: Key.memo.rawValue)
     }
 
-    /// 메모 편집하기
+    /// 메모 수정하기
     func editMemo(_ id: Int, _ newValue: Memo) {
         var currentMemos: [Memo] = getMemos()
         currentMemos.indices.filter { currentMemos[$0].id == id }.forEach {

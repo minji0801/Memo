@@ -18,6 +18,7 @@ protocol DetailProtocol: AnyObject {
     func showDetailPopupViewController(_ popoverContentController: DetailPopupViewController)
     func pushToWriteViewController()
     func showDeleteAlertViewController()
+    func showToast(_ isSecret: Bool)
 }
 
 final class DetailPresenter: NSObject {
@@ -58,6 +59,10 @@ final class DetailPresenter: NSObject {
             popoverPresentationController.delegate = self
             viewController?.showDetailPopupViewController(popoverContentController)
         }
+    }
+
+    func didTappedLockRightBarButton() {
+        viewController?.showToast(memo.isSecret)
     }
 
     func didTappedEditNoti() {

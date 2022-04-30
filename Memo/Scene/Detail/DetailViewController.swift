@@ -7,6 +7,7 @@
 
 import Foundation
 import SnapKit
+import Toast
 import UIKit
 
 final class DetailViewController: UIViewController {
@@ -42,7 +43,7 @@ final class DetailViewController: UIViewController {
         image: UIImage(systemName: "lock"),
         style: .plain,
         target: self,
-        action: nil
+        action: #selector(didTappedLockRightBarButton)
     )
 
     /// 메모 내용 텍스트 뷰
@@ -151,6 +152,18 @@ extension DetailViewController: DetailProtocol {
         deleteAlertViewController.modalPresentationStyle = .overCurrentContext
         present(deleteAlertViewController, animated: false)
     }
+
+    func showToast(_ isSecret: Bool) {
+        var style = ToastStyle()
+        style.messageAlignment = .center
+        style.messageFont = FontManager.getFont().largeFont
+
+        if isSecret {
+            view.makeToast("수정 화면에서 일반 메모로 변경하실 수 있습니다.", style: style)
+        } else {
+            view.makeToast("수정 화면에서 비밀 메모로 변경하실 수 있습니다.", style: style)
+        }
+    }
 }
 
 // MARK: - @objc Function
@@ -165,7 +178,12 @@ extension DetailViewController {
         presenter.didTappedMenuRightBarButton(sender)
     }
 
-    /// 팝업에서 편집 버튼 눌렀다는 노티 -> 수정(작성) 화면으로 이동
+    /// 자물쇠 버튼 클릭 -> 현재 상태 Toast 알림으로 띄워주기
+    @objc func didTappedLockRightBarButton() {
+        presenter.didTappedLockRightBarButton()
+    }
+
+    /// 팝업에서 수정 버튼 눌렀다는 노티 -> 수정(작성) 화면으로 이동
     @objc func didTappedEditNoti(_ notification: Notification) {
         presenter.didTappedEditNoti()
     }

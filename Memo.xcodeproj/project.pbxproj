@@ -10,6 +10,7 @@
 		979FBFCB19A04463DFED0C08 /* Pods_Memo_MemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B60E8D7155570412E4E48FB1 /* Pods_Memo_MemoUITests.framework */; };
 		A5D29D9D281CE5DD00A2BDE9 /* DeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D29D9C281CE5DD00A2BDE9 /* DeleteAlertViewController.swift */; };
 		A5D29D9F281CE5E800A2BDE9 /* DeleteAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D29D9E281CE5E800A2BDE9 /* DeleteAlertPresenter.swift */; };
+		A5D29DA3281CFA6B00A2BDE9 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A5D29DA2281CFA6B00A2BDE9 /* Toast */; };
 		A5E360A0281B996900EBE99C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3609F281B996900EBE99C /* AppDelegate.swift */; };
 		A5E360A2281B996900EBE99C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360A1281B996900EBE99C /* SceneDelegate.swift */; };
 		A5E360A4281B996900EBE99C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360A3281B996900EBE99C /* ListViewController.swift */; };
@@ -111,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5D29DA3281CFA6B00A2BDE9 /* Toast in Frameworks */,
 				F9FBD07CD1EEE79CA091852E /* Pods_Memo.framework in Frameworks */,
 				A5E360D8281BA51400EBE99C /* SnapKit in Frameworks */,
 			);
@@ -372,6 +374,7 @@
 			name = Memo;
 			packageProductDependencies = (
 				A5E360D7281BA51400EBE99C /* SnapKit */,
+				A5D29DA2281CFA6B00A2BDE9 /* Toast */,
 			);
 			productName = Memo;
 			productReference = A5E3609C281B996900EBE99C /* Memo.app */;
@@ -449,6 +452,7 @@
 			mainGroup = A5E36093281B996900EBE99C;
 			packageReferences = (
 				A5E360D6281BA51400EBE99C /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A5D29DA1281CFA6B00A2BDE9 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = A5E3609D281B996900EBE99C /* Products */;
 			projectDirPath = "";
@@ -943,6 +947,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A5D29DA1281CFA6B00A2BDE9 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		A5E360D6281BA51400EBE99C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -954,6 +966,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A5D29DA2281CFA6B00A2BDE9 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5D29DA1281CFA6B00A2BDE9 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		A5E360D7281BA51400EBE99C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A5E360D6281BA51400EBE99C /* XCRemoteSwiftPackageReference "SnapKit" */;
