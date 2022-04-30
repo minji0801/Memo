@@ -13,6 +13,7 @@ protocol ListProtocol: AnyObject {
     func setupNoti()
     func setupView()
 
+    func keyboardDown()
     func reloadTableView()
     func pushToWriteViewController()
     func pushToDetailViewController(_ memo: Memo)
@@ -25,6 +26,7 @@ final class ListPresenter: NSObject {
     private let userDefaultsManager: UserDefaultsManagerProtol
 
     private var memos: [Memo] = []
+    private var searchText: String = ""
 
     init(
         viewController: ListProtocol?,
@@ -41,7 +43,11 @@ final class ListPresenter: NSObject {
     }
 
     func viewWillAppear() {
-        memos = userDefaultsManager.getMemos()
+        if searchText.isEmpty {
+            memos = userDefaultsManager.getMemos()
+        } else {
+            memos = userDefaultsManager.getMemos().filter { $0.content.contains(searchText) }
+        }
         viewController?.reloadTableView()
     }
 
@@ -70,12 +76,16 @@ final class ListPresenter: NSObject {
 }
 
 // MARK: - UISearchController
-extension ListPresenter: UISearchBarDelegate, UISearchControllerDelegate {
-    /// 검색 바 보여졌을 때: 자동 포커싱
-    func didPresentSearchController(_ searchController: UISearchController) {
-        DispatchQueue.main.async {
-            searchController.searchBar.becomeFirstResponder()
-        }
+extension ListPresenter: UISearchBarDelegate {
+    /// 검색어가 변경될 때 마다
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText
+        viewWillAppear()
+    }
+
+    /// 검색 버튼 클릭
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewController?.keyboardDown()
     }
 }
 
@@ -110,6 +120,11 @@ extension ListPresenter: UITableViewDataSource, UITableViewDelegate {
             viewController?.showPasswordAlertViewController(memo)
         }
         viewController?.pushToDetailViewController(memo)
+    }
+
+    /// 스크롤 시작될 때
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        viewController?.keyboardDown()
     }
 }
 

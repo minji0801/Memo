@@ -238,11 +238,11 @@
 			isa = PBXGroup;
 			children = (
 				A5E360FA281BF7E300EBE99C /* Alerts */,
+				A5EDCFA6281C2B6400C128FE /* Detail */,
+				A5EDCFAB281C2B8300C128FE /* DetailPopup */,
 				A5E360D2281B9DA100EBE99C /* List */,
 				A5E360DD281BAC0800EBE99C /* ListPopup */,
 				A5E360E2281BAFA900EBE99C /* Write */,
-				A5EDCFA6281C2B6400C128FE /* Detail */,
-				A5EDCFAB281C2B8300C128FE /* DetailPopup */,
 			);
 			path = Scene;
 			sourceTree = "<group>";

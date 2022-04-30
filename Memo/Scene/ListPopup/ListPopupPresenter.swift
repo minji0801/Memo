@@ -23,4 +23,12 @@ final class ListPopupPresenter: NSObject {
         viewController?.setupView()
         viewController?.applyFont()
     }
+
+    func didTappedSearchButton() {
+        
+    }
+
+    func didTappedSettingsButton() {
+        
+    }
 }

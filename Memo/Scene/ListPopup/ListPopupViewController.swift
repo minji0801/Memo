@@ -68,7 +68,13 @@ extension ListPopupViewController: ListPopupProtocol {
 
 // MARK: - @objc Function
 extension ListPopupViewController {
-    @objc func didTappedSearchButton() {}
+    /// 검색 버튼 클릭
+    @objc func didTappedSearchButton() {
+        presenter.didTappedSearchButton()
+    }
 
-    @objc func didTappedSettingsButton() {}
+    /// 설정 버튼 클릭
+    @objc func didTappedSettingsButton() {
+        presenter.didTappedSettingsButton()
+    }
 }

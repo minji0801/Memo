@@ -10,14 +10,7 @@ import UIKit
 
 final class ListViewController: UIViewController {
     private lazy var presenter = ListPresenter(viewController: self)
-
-    /// 왼쪽 바 버튼: 메뉴 버튼
-    private lazy var leftBarButton = UIBarButtonItem(
-        image: UIImage(systemName: "ellipsis"),
-        style: .plain,
-        target: self,
-        action: #selector(didTappedLeftBarButton)
-    )
+    private let font = FontManager.getFont()
 
     /// 오른쪽 바 버튼: 메모 작성 버튼
     private lazy var rightBarButton = UIBarButtonItem(
@@ -27,6 +20,19 @@ final class ListViewController: UIViewController {
         action: #selector(didTappedRightBarButton)
     )
 
+    /// 검색 바
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "메모 검색"
+        searchBar.searchTextField.font = font.largeFont
+        searchBar.searchBarStyle = .minimal
+
+        searchBar.delegate = presenter
+
+        return searchBar
+    }()
+
+    /// 테이블 뷰
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = presenter
@@ -68,7 +74,6 @@ extension ListViewController: ListProtocol {
     /// 네비게이션 바 구성
     func setupNavigationBar() {
         navigationItem.title = "메모 목록"
-        navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
 
         let font = FontManager.getFont()
@@ -91,11 +96,24 @@ extension ListViewController: ListProtocol {
     func setupView() {
         view.backgroundColor = .systemBackground
 
-        view.addSubview(tableView)
+        [searchBar, tableView].forEach {
+            view.addSubview($0)
+        }
+
+        searchBar.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(10.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+        }
 
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(searchBar.snp.bottom)
         }
+    }
+
+    /// 키보드 내리기
+    func keyboardDown() {
+        view.endEditing(true)
     }
 
     /// 테이블 뷰 다시 로드하기
@@ -130,11 +148,6 @@ extension ListViewController: ListProtocol {
 
 // MARK: - @objc Function
 extension ListViewController {
-    /// 메뉴 버튼 클릭 -> 메뉴(검색, 설정) 보여주기
-    @objc func didTappedLeftBarButton(_ sender: UIBarButtonItem) {
-        presenter.didTappedLeftBarButton(sender)
-    }
-
     /// 메모 작성 버튼 클릭 -> 작성 화면으로 이동하기
     @objc func didTappedRightBarButton() {
         presenter.didTappedRightBarButton()
