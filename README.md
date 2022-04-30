@@ -121,3 +121,25 @@ I made it simple so that you can know at once that it is a memo app.
 
 ### UI/UX
 <p align="center"><img alt="UI/UX Light Mode" src="https://user-images.githubusercontent.com/49383370/166102878-0df41e69-13b8-4b6f-9fbd-8a5dc1a93d58.png"></p>
+
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
+
+<!-- Footer -->
+<div align="center">
+  
+  <!-- GitHub Stats -->
+  <a href="https://github.com/minji0801"><img src="https://github-readme-stats.vercel.app/api?username=minji0801&show_icons=true&theme=dark"/></a>
+  
+  <br/>
+  <br/>
+  <br/>
+  
+  <!-- Hit -->
+  <a href="https://github.com/minji0801/Modakyi"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fminji0801%2FMemo&count_bg=%23000000&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
+</div>
