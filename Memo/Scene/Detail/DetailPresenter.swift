@@ -10,6 +10,7 @@ import UIKit
 
 protocol DetailProtocol: AnyObject {
     func setupNavigationBar()
+    func setupNoti()
     func setupView(_ memo: Memo)
     func applyFont()
 
@@ -32,6 +33,7 @@ final class DetailPresenter: NSObject {
 
     func viewDidLoad() {
         viewController?.setupNavigationBar()
+        viewController?.setupNoti()
         viewController?.setupView(memo)
         viewController?.applyFont()
     }
@@ -53,7 +55,13 @@ final class DetailPresenter: NSObject {
         }
     }
 
-    func didTappedLockRightBarButton() {}
+    func didTappedEditNoti() {
+        // 수정화면으로 넘어가기
+    }
+
+    func didTappedDeleteNoti() {
+        // Alert창 보여주기
+    }
 }
 
 // MARK: - UIPopoverPresentationControllerDelegate

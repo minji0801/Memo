@@ -10,7 +10,7 @@ import SnapKit
 import UIKit
 
 final class DetailPopupViewController: UIViewController {
-    private lazy var presenter = ListPopupPresenter(viewController: self)
+    private lazy var presenter = DetailPopupPresenter(viewController: self)
 
     /// 편집 버튼
     private lazy var editButton: UIButton = {
@@ -40,7 +40,7 @@ final class DetailPopupViewController: UIViewController {
 }
 
 // MARK: - ListPopupProtocol Function
-extension DetailPopupViewController: ListPopupProtocol {
+extension DetailPopupViewController: DetailPopupProtocol {
     /// 뷰 구성
     func setupView() {
         view.backgroundColor = .systemBackground
@@ -64,11 +64,20 @@ extension DetailPopupViewController: ListPopupProtocol {
         editButton.titleLabel?.font = font.largeFont
         deleteButton.titleLabel?.font = font.largeFont
     }
+
+    /// 화면 닫기
+    func dismiss() {
+        dismiss(animated: true)
+    }
 }
 
 // MARK: - @objc Function
 extension DetailPopupViewController {
-    @objc func didTappedEditButton() {}
+    @objc func didTappedEditButton() {
+        presenter.didTappedEditButton()
+    }
 
-    @objc func didTappedDeleteButton() {}
+    @objc func didTappedDeleteButton() {
+        presenter.didTappedDeleteButton()
+    }
 }

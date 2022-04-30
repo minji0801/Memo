@@ -10,6 +10,7 @@ import Foundation
 protocol DetailPopupProtocol: AnyObject {
     func setupView()
     func applyFont()
+    func dismiss()
 }
 
 final class DetailPopupPresenter: NSObject {
@@ -22,5 +23,15 @@ final class DetailPopupPresenter: NSObject {
     func viewDidLoad() {
         viewController?.setupView()
         viewController?.applyFont()
+    }
+
+    func didTappedEditButton() {
+        NotificationCenter.default.post(name: NSNotification.Name("DidTappedEdit"), object: nil)
+        viewController?.dismiss()
+    }
+
+    func didTappedDeleteButton() {
+        NotificationCenter.default.post(name: NSNotification.Name("DidTappedDelete"), object: nil)
+        viewController?.dismiss()
     }
 }

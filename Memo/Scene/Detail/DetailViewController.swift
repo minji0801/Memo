@@ -68,6 +68,22 @@ extension DetailViewController: DetailProtocol {
         navigationItem.rightBarButtonItems = [menuRightBarButton, lockRightBarButton]
     }
 
+    /// 노티 구성
+    func setupNoti() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didTappedEditNoti(_:)),
+            name: NSNotification.Name("DidTappedEdit"),
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didTappedDeleteNoti(_:)),
+            name: NSNotification.Name("DidTappedDelete"),
+            object: nil
+        )
+    }
+
     /// 뷰 구성
     func setupView(_ memo: Memo) {
         view.backgroundColor = .systemBackground
@@ -116,6 +132,17 @@ extension DetailViewController: DetailProtocol {
     func showDetailPopupViewController(_ popoverContentController: DetailPopupViewController) {
         present(popoverContentController, animated: true, completion: nil)
     }
+
+    /// 수정(작성)화면 push
+    func pushToWriteViewController() {
+        let writeViewController = WriteViewController()
+        navigationController?.pushViewController(writeViewController, animated: true)
+    }
+
+    /// 메모 삭제 Alert 보여주기
+    func showDeleteAlertViewController() {
+//
+    }
 }
 
 // MARK: - @objc Function
@@ -128,5 +155,15 @@ extension DetailViewController {
     /// 메뉴 버튼 클릭 -> 메뉴(수정, 삭제) 보여주기
     @objc func didTappedMenuRightBarButton(_ sender: UIBarButtonItem) {
         presenter.didTappedMenuRightBarButton(sender)
+    }
+
+    @objc func didTappedEditNoti(_ notification: Notification) {
+        print("didTappedEdit")
+        presenter.didTappedEditNoti()
+    }
+
+    @objc func didTappedDeleteNoti(_ notification: Notification) {
+        print("didTappedDelete")
+        presenter.didTappedDeleteNoti()
     }
 }
