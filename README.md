@@ -10,6 +10,10 @@
   ![Swift](https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=Swift&logoColor=white)
   ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white)
 
+
+<img width="200" src="https://user-images.githubusercontent.com/49383370/166145321-90612c7a-6589-4119-9c36-3b6699fa4500.mov">
+
+
 </div>
 
 <!-- Navigation -->
