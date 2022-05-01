@@ -17,7 +17,6 @@ protocol ListProtocol: AnyObject {
     func reloadTableView()
     func pushToWriteViewController()
     func pushToDetailViewController(_ memo: Memo)
-    func showListPopupViewController(_ popoverContentController: ListPopupViewController)
     func showPasswordAlertViewController(_ memo: Memo)
     func showDeleteAlertViewController()
 }
@@ -52,19 +51,6 @@ final class ListPresenter: NSObject {
             memos = userDefaultsManager.getMemos().filter { $0.content.contains(searchText) }
         }
         viewController?.reloadTableView()
-    }
-
-    func didTappedLeftBarButton(_ sender: UIBarButtonItem) {
-        let popoverContentController = ListPopupViewController()
-        popoverContentController.modalPresentationStyle = .popover
-        popoverContentController.preferredContentSize = CGSize(width: 80, height: 100)
-
-        if let popoverPresentationController = popoverContentController.popoverPresentationController {
-            popoverPresentationController.permittedArrowDirections = .right
-            popoverPresentationController.barButtonItem = sender
-            popoverPresentationController.delegate = self
-            viewController?.showListPopupViewController(popoverContentController)
-        }
     }
 
     func didTappedRightBarButton() {

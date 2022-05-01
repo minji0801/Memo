@@ -137,11 +137,6 @@ extension ListViewController: ListProtocol {
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 
-    /// 팝업 메뉴 보여주기
-    func showListPopupViewController(_ popoverContentController: ListPopupViewController) {
-        present(popoverContentController, animated: true, completion: nil)
-    }
-
     /// 암호 입력 Alert 창 보여주기
     func showPasswordAlertViewController(_ memo: Memo) {
         let passwordAlertViewController = PasswordAlertViewController(isChecking: true, memo: memo)

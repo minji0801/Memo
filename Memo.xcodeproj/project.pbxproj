@@ -22,8 +22,6 @@
 		A5E360D1281B9D9E00EBE99C /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360D0281B9D9E00EBE99C /* ListPresenter.swift */; };
 		A5E360D5281BA44C00EBE99C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360D4281BA44C00EBE99C /* ListTableViewCell.swift */; };
 		A5E360D8281BA51400EBE99C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A5E360D7281BA51400EBE99C /* SnapKit */; };
-		A5E360DA281BABE800EBE99C /* ListPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360D9281BABE800EBE99C /* ListPopupViewController.swift */; };
-		A5E360DC281BABFF00EBE99C /* ListPopupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360DB281BABFF00EBE99C /* ListPopupPresenter.swift */; };
 		A5E360DF281BAF9D00EBE99C /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360DE281BAF9D00EBE99C /* WriteViewController.swift */; };
 		A5E360E1281BAFA500EBE99C /* WritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360E0281BAFA500EBE99C /* WritePresenter.swift */; };
 		A5E360E4281BC12300EBE99C /* DismissAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E360E3281BC12300EBE99C /* DismissAlertViewController.swift */; };
@@ -83,8 +81,6 @@
 		A5E360C2281B996B00EBE99C /* MemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A5E360D0281B9D9E00EBE99C /* ListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenter.swift; sourceTree = "<group>"; };
 		A5E360D4281BA44C00EBE99C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		A5E360D9281BABE800EBE99C /* ListPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPopupViewController.swift; sourceTree = "<group>"; };
-		A5E360DB281BABFF00EBE99C /* ListPopupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPopupPresenter.swift; sourceTree = "<group>"; };
 		A5E360DE281BAF9D00EBE99C /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		A5E360E0281BAFA500EBE99C /* WritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePresenter.swift; sourceTree = "<group>"; };
 		A5E360E3281BC12300EBE99C /* DismissAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAlertViewController.swift; sourceTree = "<group>"; };
@@ -241,19 +237,9 @@
 				A5EDCFA6281C2B6400C128FE /* Detail */,
 				A5EDCFAB281C2B8300C128FE /* DetailPopup */,
 				A5E360D2281B9DA100EBE99C /* List */,
-				A5E360DD281BAC0800EBE99C /* ListPopup */,
 				A5E360E2281BAFA900EBE99C /* Write */,
 			);
 			path = Scene;
-			sourceTree = "<group>";
-		};
-		A5E360DD281BAC0800EBE99C /* ListPopup */ = {
-			isa = PBXGroup;
-			children = (
-				A5E360D9281BABE800EBE99C /* ListPopupViewController.swift */,
-				A5E360DB281BABFF00EBE99C /* ListPopupPresenter.swift */,
-			);
-			path = ListPopup;
 			sourceTree = "<group>";
 		};
 		A5E360E2281BAFA900EBE99C /* Write */ = {
@@ -584,13 +570,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E360DC281BABFF00EBE99C /* ListPopupPresenter.swift in Sources */,
 				A5E360A4281B996900EBE99C /* ListViewController.swift in Sources */,
 				A5E360FD281BF7FE00EBE99C /* PasswordAlertViewController.swift in Sources */,
 				A5EDCFA5281C28A400C128FE /* DetailPresenter.swift in Sources */,
 				A5E360F4281BE59C00EBE99C /* FontManager.swift in Sources */,
 				A5E360F9281BECBA00EBE99C /* Memo.swift in Sources */,
-				A5E360DA281BABE800EBE99C /* ListPopupViewController.swift in Sources */,
 				A5D29D9D281CE5DD00A2BDE9 /* DeleteAlertViewController.swift in Sources */,
 				A5D29D9F281CE5E800A2BDE9 /* DeleteAlertPresenter.swift in Sources */,
 				A5E360A0281B996900EBE99C /* AppDelegate.swift in Sources */,
@@ -705,7 +689,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -759,7 +743,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -795,7 +779,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -825,7 +809,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

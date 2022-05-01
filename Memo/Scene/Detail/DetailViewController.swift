@@ -149,6 +149,7 @@ extension DetailViewController: DetailProtocol {
         present(deleteAlertViewController, animated: false)
     }
 
+    /// Toast 띄우기
     func showToast(_ isSecret: Bool) {
         var style = ToastStyle()
         style.messageAlignment = .center

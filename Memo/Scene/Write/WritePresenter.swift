@@ -65,24 +65,24 @@ final class WritePresenter: NSObject {
 
         if content.isEmpty {
             viewController?.showSaveAlertViewController()
-        } else {
-            var id: Int
-            if isEditing {
-                id = memo.id
-            } else {
-                id = userDefaultsManager.getMemoId()
-            }
-
-            let memo: Memo = Memo(id: id, content: content, password: memo.password, isSecret: memo.isSecret)
-
-            if isEditing {
-                userDefaultsManager.editMemo(id, memo)
-            } else {
-                userDefaultsManager.setMemo(memo)
-                userDefaultsManager.setMemoId()
-            }
-            viewController?.popToRootViewController()
+            return
         }
+
+        var id: Int
+        var newvalue: Memo
+
+        if isEditing {
+            id = memo.id
+            newvalue = Memo(id: id, content: content, password: memo.password, isSecret: memo.isSecret)
+            userDefaultsManager.editMemo(id, newvalue)
+        } else {
+            id = userDefaultsManager.getMemoId()
+            newvalue = Memo(id: id, content: content, password: memo.password, isSecret: memo.isSecret)
+            userDefaultsManager.setMemo(newvalue)
+            userDefaultsManager.setMemoId()
+        }
+
+        viewController?.popToRootViewController()
     }
 
     func didTappedLockRightBarButton() {

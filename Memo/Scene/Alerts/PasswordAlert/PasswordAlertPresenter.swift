@@ -45,18 +45,19 @@ final class PasswordAlertPresenter: NSObject {
 
         if password.isEmpty {
             viewController?.updateMessageLabel(isEmpty: true)
-        } else {
-            if isChecking {
-                if password == memo.password {
-                    viewController?.dismiss()
-                    NotificationCenter.default.post(name: NSNotification.Name("ShowMemo"), object: memo)
-                } else {
-                    viewController?.updateMessageLabel(isEmpty: false)
-                }
-            } else {
+            return
+        }
+
+        if isChecking {
+            if password == memo.password {
                 viewController?.dismiss()
-                NotificationCenter.default.post(name: NSNotification.Name("InputPassword"), object: password)
+                NotificationCenter.default.post(name: NSNotification.Name("ShowMemo"), object: memo)
+            } else {
+                viewController?.updateMessageLabel(isEmpty: false)
             }
+        } else {
+            viewController?.dismiss()
+            NotificationCenter.default.post(name: NSNotification.Name("InputPassword"), object: password)
         }
     }
 }

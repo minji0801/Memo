@@ -32,6 +32,6 @@ final class DismissAlertPresenter: NSObject {
     func didTappedYesButton() {
         viewController?.dismiss()
         NotificationCenter.default.post(
-            name: NSNotification.Name("PopViewController"),  object: nil)
+            name: NSNotification.Name("PopViewController"), object: nil)
     }
 }
