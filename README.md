@@ -79,11 +79,11 @@ And secret notes can only be viewed by entering a password.
 
 <!-- 4. writing notes -->
 ## writing notes
-On the memo screen, you can check the number of characters and lock the memo. The keyboard is set to always be visible and the number of characters of what you typed is displayed directly above the keyboard.
+On the memo writing screen, you can check the number of characters and lock the memo. The keyboard is set to always be visible and the number of characters of what you typed is displayed directly above the keyboard.
 
 <p align="left"><img width="200" src="https://user-images.githubusercontent.com/49383370/166103132-afeaae54-c94f-4645-949e-d0f769e6cb7b.png"></p>
 
-u can lock notes by entering a password. When a password is entered, ```NotificationCenter``` detects it, applies the entered password and updates the lock icon.
+You can lock notes by entering a password. When a password is entered, ```NotificationCenter``` detects it, applies the entered password and updates the lock icon.
 
 <p align="left"><img width="200" src="https://user-images.githubusercontent.com/49383370/166104108-b0fc043f-0fef-4845-9030-a62ca7de5d2a.png"></p>
 
@@ -91,9 +91,7 @@ u can lock notes by entering a password. When a password is entered, ```Notifica
 
 <!-- 5. Edit notes -->
 ## Edit notes
-The edit memo screen uses the memo writing screen. To distinguish between the two, pass the ```isEditing: Bool``` value when accessing the screen.
-
-The function is the same as the memo writing screen, but it is different when saving the edited(writied) memo.
+The edit memo screen uses the memo writing screen. To distinguish between the two, pass the ```isEditing: Bool``` value when accessing the screen. The function is the same as the memo writing screen, but it is different when saving the edited(writied) memo.
 
 In the case of a new memo, ```a new ID value``` is given to save the memo, but when editing an existing memo, ```the existing ID value``` is imported and used.
 
