@@ -22,6 +22,7 @@ protocol WriteProtocol: AnyObject {
 
     func keyboardHeightUp(_ keyboardHeight: CGFloat)
     func updateTextCount(_ count: Int)
+    func updateTextView()
     func updateLockButton(_ isSecret: Bool)
 }
 
@@ -117,5 +118,6 @@ final class WritePresenter: NSObject {
 extension WritePresenter: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         viewController?.updateTextCount(textView.text.count)
+        viewController?.updateTextView()
     }
 }

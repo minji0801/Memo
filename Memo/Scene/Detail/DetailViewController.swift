@@ -102,6 +102,17 @@ extension DetailViewController: DetailProtocol {
 
         textView.text = memo.content
 
+        let attrString = NSMutableAttributedString(string: textView.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
+
+        attrString.addAttribute(
+            NSAttributedString.Key.paragraphStyle,
+            value: paragraphStyle,
+            range: NSMakeRange(0, attrString.length)
+        )
+        textView.attributedText = attrString
+
         view.addSubview(textView)
 
         let spacing: CGFloat = 16.0
