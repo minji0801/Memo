@@ -30,9 +30,9 @@ final class DetailViewController: UIViewController {
         action: #selector(didTappedLeftBarButton)
     )
 
-    /// 오른쪽 바 버튼: 메뉴 버튼
+    /// 오른쪽 바 버튼: 삭제 버튼
     private lazy var menuRightBarButton = UIBarButtonItem(
-        image: UIImage(systemName: "ellipsis"),
+        image: UIImage(systemName: "trash"),
         style: .plain,
         target: self,
         action: #selector(didTappedMenuRightBarButton)
@@ -49,7 +49,6 @@ final class DetailViewController: UIViewController {
     /// 메모 내용 텍스트 뷰
     private lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.isEditable = false
 
         return textView
     }()
@@ -73,20 +72,14 @@ extension DetailViewController: DetailProtocol {
     func setupNoti() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(didTappedEditNoti(_:)),
-            name: NSNotification.Name("DidTappedEdit"),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didTappedDeleteNoti(_:)),
-            name: NSNotification.Name("DidTappedDelete"),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
             selector: #selector(deleteMemoNoti(_:)),
             name: NSNotification.Name("DeleteMemo"),
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(inputPasswordNoti),
+            name: NSNotification.Name("InputPassword"),
             object: nil
         )
     }
@@ -131,17 +124,6 @@ extension DetailViewController: DetailProtocol {
         navigationController?.popViewController(animated: true)
     }
 
-    /// 팝업 메뉴 보여주기
-    func showDetailPopupViewController(_ popoverContentController: DetailPopupViewController) {
-        present(popoverContentController, animated: true, completion: nil)
-    }
-
-    /// 메모 수정 화면 push
-    func pushToWriteViewController() {
-        let writeViewController = WriteViewController(isEditing: true, memo: presenter.memo)
-        navigationController?.pushViewController(writeViewController, animated: true)
-    }
-
     /// 메모 삭제 Alert 보여주기
     func showDeleteAlertViewController() {
         let deleteAlertViewController = DeleteAlertViewController()
@@ -149,18 +131,19 @@ extension DetailViewController: DetailProtocol {
         present(deleteAlertViewController, animated: false)
     }
 
-    /// Toast 띄우기
-    func showToast(_ isSecret: Bool) {
-        var style = ToastStyle()
-        style.messageAlignment = .center
-        style.messageFont = FontManager.getFont().largeFont
-        style.messageColor = .systemBackground
-        style.backgroundColor = .label
+    /// 암호 입력 Alert 보여주기
+    func showPasswordAlertViewController() {
+        let passwordAlertViewController = PasswordAlertViewController(isChecking: false, memo: Memo.EMPTY)
+        passwordAlertViewController.modalPresentationStyle = .overCurrentContext
+        present(passwordAlertViewController, animated: false)
+    }
 
+    /// 자물쇠 버튼 업데이트
+    func updateLockButton(_ isSecret: Bool) {
         if isSecret {
-            view.makeToast("수정 화면에서 일반 메모로 변경하실 수 있습니다.", style: style)
+            lockRightBarButton.image = UIImage(systemName: "lock.fill")
         } else {
-            view.makeToast("수정 화면에서 비밀 메모로 변경하실 수 있습니다.", style: style)
+            lockRightBarButton.image = UIImage(systemName: "lock")
         }
     }
 }
@@ -169,10 +152,10 @@ extension DetailViewController: DetailProtocol {
 extension DetailViewController {
     /// 뒤로 가기 버튼 클릭 -> pop
     @objc func didTappedLeftBarButton() {
-        presenter.didTappedLeftBarButton()
+        presenter.didTappedLeftBarButton(textView.text)
     }
 
-    /// 메뉴 버튼 클릭 -> 메뉴(수정, 삭제) 보여주기
+    /// 삭제 버튼 클릭 ->  삭제 Alert 띄우기
     @objc func didTappedMenuRightBarButton(_ sender: UIBarButtonItem) {
         presenter.didTappedMenuRightBarButton(sender)
     }
@@ -182,18 +165,13 @@ extension DetailViewController {
         presenter.didTappedLockRightBarButton()
     }
 
-    /// 팝업에서 수정 버튼 눌렀다는 노티 -> 수정(작성) 화면으로 이동
-    @objc func didTappedEditNoti(_ notification: Notification) {
-        presenter.didTappedEditNoti()
-    }
-
-    /// 팝업에서 삭제 버튼 눌렀다는 노티 -> 삭제 Alert 창 보여주기
-    @objc func didTappedDeleteNoti(_ notification: Notification) {
-        presenter.didTappedDeleteNoti()
-    }
-
     /// 메모 삭제하라는 노티 -> 메모 삭제
     @objc func deleteMemoNoti(_ notification: Notification) {
         presenter.deleteMemoNoti()
+    }
+
+    /// 암호 입력했다는 노티
+    @objc func inputPasswordNoti(_ notification: Notification) {
+        presenter.inputPasswordNoti(notification)
     }
 }

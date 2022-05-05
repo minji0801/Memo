@@ -16,10 +16,9 @@ protocol DetailProtocol: AnyObject {
     func applyFont()
 
     func popViewController()
-    func showDetailPopupViewController(_ popoverContentController: DetailPopupViewController)
-    func pushToWriteViewController()
     func showDeleteAlertViewController()
-    func showToast(_ isSecret: Bool)
+    func showPasswordAlertViewController()
+    func updateLockButton(_ isSecret: Bool)
 }
 
 final class DetailPresenter: NSObject {
@@ -46,39 +45,50 @@ final class DetailPresenter: NSObject {
         viewController?.applyFont()
     }
 
-    func didTappedLeftBarButton() {
+    func didTappedLeftBarButton(_ content: String?) {
+        guard let content = content else { return }
+
+        if content.isEmpty {
+            // 내용이 비었으면 메모 삭제하기
+            deleteMemoNoti()
+            return
+        }
+
+        // 내용이 있으면 변경된 내용으로 저장하기
+        let newvalue = Memo(id: memo.id, content: content, password: memo.password, isSecret: memo.isSecret)
+        userDefaultsManager.editMemo(memo.id, newvalue)
+
         viewController?.popViewController()
     }
 
     func didTappedMenuRightBarButton(_ sender: UIBarButtonItem) {
-        let popoverContentController = DetailPopupViewController()
-        popoverContentController.modalPresentationStyle = .popover
-        popoverContentController.preferredContentSize = CGSize(width: 80, height: 100)
-
-        if let popoverPresentationController = popoverContentController.popoverPresentationController {
-            popoverPresentationController.permittedArrowDirections = .right
-            popoverPresentationController.barButtonItem = sender
-            popoverPresentationController.delegate = self
-            viewController?.showDetailPopupViewController(popoverContentController)
-        }
+        viewController?.showDeleteAlertViewController()
     }
 
     func didTappedLockRightBarButton() {
-        viewController?.showToast(memo.isSecret)
-    }
-
-    func didTappedEditNoti() {
-        viewController?.pushToWriteViewController()
-    }
-
-    func didTappedDeleteNoti() {
-        viewController?.showDeleteAlertViewController()
+        if memo.isSecret {
+            // 이미 비밀 메모로 설정했으니까 일반 메모로 바꾸기
+            memo.isSecret = false
+            memo.password = ""
+            viewController?.updateLockButton(memo.isSecret)
+        } else {
+            // 일반 메모에서 비밀메모로 바꾸기
+            viewController?.showPasswordAlertViewController()
+        }
     }
 
     func deleteMemoNoti() {
         let id = memo.id
         userDefaultsManager.deleteMemo(id)
         viewController?.popViewController()
+    }
+
+    func inputPasswordNoti(_ notification: Notification) {
+        guard let object = notification.object as? String else { return }
+
+        memo.password = object
+        memo.isSecret = true
+        viewController?.updateLockButton(memo.isSecret)
     }
 }
 
