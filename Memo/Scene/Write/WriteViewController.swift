@@ -192,8 +192,8 @@ extension WriteViewController: WriteProtocol {
             range: NSMakeRange(0, attrString.length)
         )
         textView.attributedText = attrString
-
         textView.font = font.largeFont
+        textView.textColor = .label
     }
 
     /// 자물쇠 버튼 업데이트

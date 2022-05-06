@@ -112,6 +112,7 @@ extension DetailViewController: DetailProtocol {
             range: NSMakeRange(0, attrString.length)
         )
         textView.attributedText = attrString
+        textView.textColor = .label
 
         view.addSubview(textView)
 
