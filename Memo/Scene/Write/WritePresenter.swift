@@ -9,12 +9,13 @@ import Foundation
 import UIKit
 
 protocol WriteProtocol: AnyObject {
-    func setupNavigationBar()
+    func setupNavigationBar(_ isEditing: Bool)
     func setupNoti()
     func setupGesture()
     func setupView(_ isEditing: Bool, _ memo: Memo)
     func applyFont()
 
+    func popViewController()
     func popToRootViewController()
     func showDismissAlertViewController()
     func showSaveAlertViewController()
@@ -46,18 +47,23 @@ final class WritePresenter: NSObject {
     }
 
     func viewDidLoad() {
-        viewController?.setupNavigationBar()
+        viewController?.setupNavigationBar(isEditing)
         viewController?.setupNoti()
         viewController?.setupGesture()
         viewController?.setupView(isEditing, memo)
         viewController?.applyFont()
+        viewController?.updateTextView()
     }
 
     func didTappedLeftBarButton(_ textCount: Int) {
         if textCount > 0 {
             viewController?.showDismissAlertViewController()
         } else {
-            viewController?.popToRootViewController()
+            if isEditing {
+                viewController?.popViewController()
+            } else {
+                viewController?.popToRootViewController()
+            }
         }
     }
 
@@ -83,7 +89,11 @@ final class WritePresenter: NSObject {
             userDefaultsManager.setMemoId()
         }
 
-        viewController?.popToRootViewController()
+        if isEditing {
+            viewController?.popViewController()
+        } else {
+            viewController?.popToRootViewController()
+        }
     }
 
     func didTappedLockRightBarButton() {

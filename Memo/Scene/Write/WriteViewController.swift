@@ -74,12 +74,17 @@ final class WriteViewController: UIViewController {
 // MARK: - ListProtocol Function
 extension WriteViewController: WriteProtocol {
     /// 네비게이션 바 구성
-    func setupNavigationBar() {
-        navigationItem.title = "메모 작성"
+    func setupNavigationBar(_ isEditing: Bool) {
+        if isEditing {
+            navigationItem.title = "메모 수정"
+        } else {
+            navigationItem.title = "메모 작성"
+        }
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItems = [saveRightBarButton, lockRightBarButton]
     }
 
+    /// 노티피케이션 구성
     func setupNoti() {
         NotificationCenter.default.addObserver(
             self,
@@ -138,6 +143,11 @@ extension WriteViewController: WriteProtocol {
     /// 폰트 적용
     func applyFont() {
         countLabel.font = font.mediumFont
+    }
+
+    /// 화면 닫기
+    func popViewController() {
+        navigationController?.popViewController(animated: false)
     }
 
     /// root 뷰로 pop

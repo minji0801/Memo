@@ -12,20 +12,28 @@ protocol DetailProtocol: AnyObject {
     func setupNavigationBar()
     func setupNoti()
     func setupGesture()
-    func setupView(_ memo: Memo)
+    func setupView()
+    func setupMemo(_ memo: Memo)
     func applyFont()
 
     func popViewController()
     func showDeleteAlertViewController()
+    func showSaveAlertViewController()
     func showPasswordAlertViewController()
+    func showWriteViewController(_ memo: Memo)
+
     func updateLockButton(_ isSecret: Bool)
+    func updateTextCount(_ count: Int)
+    func updateTextView()
+    func changeStatus(isEditing: Bool)
+    func keyboardHeightUpDown(_ keyboardHeight: CGFloat, isUp: Bool)
 }
 
 final class DetailPresenter: NSObject {
     private let viewController: DetailProtocol?
     private let userDefaultsManager: UserDefaultsManagerProtol
 
-    var memo: Memo
+    private var memo: Memo
 
     init(
         viewController: DetailProtocol?,
@@ -41,8 +49,13 @@ final class DetailPresenter: NSObject {
         viewController?.setupNavigationBar()
         viewController?.setupNoti()
         viewController?.setupGesture()
-        viewController?.setupView(memo)
+        viewController?.setupView()
         viewController?.applyFont()
+        viewController?.updateTextView()
+    }
+
+    func viewWillAppear() {
+        viewController?.setupMemo(memo)
     }
 
     func didTappedLeftBarButton(_ content: String?) {
@@ -61,7 +74,7 @@ final class DetailPresenter: NSObject {
         viewController?.popViewController()
     }
 
-    func didTappedMenuRightBarButton(_ sender: UIBarButtonItem) {
+    func didTappedDeleteRightBarButton(_ sender: UIBarButtonItem) {
         viewController?.showDeleteAlertViewController()
     }
 
@@ -77,6 +90,24 @@ final class DetailPresenter: NSObject {
         }
     }
 
+    func didTappedSaveRightBarButton(_ content: String?) {
+        guard let content = content else { return }
+
+        if content.isEmpty {
+            viewController?.showSaveAlertViewController()
+            return
+        }
+
+        var id: Int
+        var newvalue: Memo
+
+        id = memo.id
+        newvalue = Memo(id: id, content: content, password: memo.password, isSecret: memo.isSecret)
+        userDefaultsManager.editMemo(id, newvalue)
+        // TODO: 일반 모드로 바꾸기 - 탭바 삭제버튼으로, 키보드 내리기
+        viewController?.changeStatus(isEditing: false)
+    }
+
     func deleteMemoNoti() {
         let id = memo.id
         userDefaultsManager.deleteMemo(id)
@@ -89,6 +120,28 @@ final class DetailPresenter: NSObject {
         memo.password = object
         memo.isSecret = true
         viewController?.updateLockButton(memo.isSecret)
+    }
+
+    func didTappedTextView() {
+//        viewController?.showWriteViewController(memo)
+        // TODO: 수정 모드로 바꾸기 - 탭바 체크버튼으로, 키보드 올리기
+        viewController?.changeStatus(isEditing: true)
+    }
+
+    func willShowKeyBoard(_ notification: Notification, isUp: Bool) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            viewController?.keyboardHeightUpDown(keyboardHeight, isUp: isUp)
+        }
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension DetailPresenter: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        viewController?.updateTextCount(textView.text.count)
+        viewController?.updateTextView()
     }
 }
 
