@@ -14,7 +14,6 @@ protocol DetailProtocol: AnyObject {
     func setupGesture()
     func setupView()
     func setupMemo(_ memo: Memo)
-    func applyFont()
 
     func popViewController()
     func showDeleteAlertViewController()
@@ -49,12 +48,11 @@ final class DetailPresenter: NSObject {
         viewController?.setupNoti()
         viewController?.setupGesture()
         viewController?.setupView()
-        viewController?.applyFont()
-        viewController?.updateTextView()
     }
 
     func viewWillAppear() {
         viewController?.setupMemo(memo)
+        viewController?.updateTextView()
     }
 
     func didTappedLeftBarButton(_ content: String?) {
@@ -138,7 +136,6 @@ final class DetailPresenter: NSObject {
 extension DetailPresenter: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         viewController?.updateTextCount(textView.text.count)
-        viewController?.updateTextView()
     }
 }
 

@@ -187,19 +187,19 @@ extension WriteViewController: WriteProtocol {
 
     /// 글자 수 업데이트
     func updateTextCount(_ count: Int) {
-        countLabel.text = "\(count)"
+        countLabel.text = "글자수 : \(count)"
     }
 
     /// TextView 스타일 업데이트
     func updateTextView() {
         let attrString = NSMutableAttributedString(string: textView.text!)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 10
+        paragraphStyle.lineSpacing = 20
 
         attrString.addAttribute(
             NSAttributedString.Key.paragraphStyle,
             value: paragraphStyle,
-            range: NSMakeRange(0, attrString.length)
+            range: NSRange(location: 0, length: attrString.length)
         )
         textView.attributedText = attrString
         textView.font = font.largeFont

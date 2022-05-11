@@ -52,7 +52,6 @@ final class WritePresenter: NSObject {
         viewController?.setupGesture()
         viewController?.setupView(isEditing, memo)
         viewController?.applyFont()
-        viewController?.updateTextView()
     }
 
     func didTappedLeftBarButton(_ textCount: Int) {
