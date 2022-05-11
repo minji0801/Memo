@@ -20,13 +20,12 @@ protocol DetailProtocol: AnyObject {
     func showDeleteAlertViewController()
     func showSaveAlertViewController()
     func showPasswordAlertViewController()
-    func showWriteViewController(_ memo: Memo)
 
     func updateLockButton(_ isSecret: Bool)
     func updateTextCount(_ count: Int)
     func updateTextView()
     func changeStatus(isEditing: Bool)
-    func keyboardHeightUpDown(_ keyboardHeight: CGFloat, isUp: Bool)
+    func keyboardUpOrDown(_ keyboardHeight: CGFloat, isUp: Bool)
 }
 
 final class DetailPresenter: NSObject {
@@ -104,7 +103,7 @@ final class DetailPresenter: NSObject {
         id = memo.id
         newvalue = Memo(id: id, content: content, password: memo.password, isSecret: memo.isSecret)
         userDefaultsManager.editMemo(id, newvalue)
-        // TODO: 일반 모드로 바꾸기 - 탭바 삭제버튼으로, 키보드 내리기
+
         viewController?.changeStatus(isEditing: false)
     }
 
@@ -122,18 +121,16 @@ final class DetailPresenter: NSObject {
         viewController?.updateLockButton(memo.isSecret)
     }
 
-    func didTappedTextView() {
-//        viewController?.showWriteViewController(memo)
-        // TODO: 수정 모드로 바꾸기 - 탭바 체크버튼으로, 키보드 올리기
-        viewController?.changeStatus(isEditing: true)
-    }
-
     func willShowKeyBoard(_ notification: Notification, isUp: Bool) {
+        // 키보드 높이에 따라 뷰 조정하기
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            viewController?.keyboardHeightUpDown(keyboardHeight, isUp: isUp)
+            viewController?.keyboardUpOrDown(keyboardHeight, isUp: isUp)
         }
+
+        // 수정 모드로 변환하기
+        if isUp { viewController?.changeStatus(isEditing: true) }
     }
 }
 

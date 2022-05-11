@@ -128,12 +128,6 @@ extension DetailViewController: DetailProtocol {
             action: #selector(didTappedLeftBarButton)
         )
         view.addGestureRecognizer(swipeLeft)
-
-        let touchUpInside = UITapGestureRecognizer(
-            target: self,
-            action: #selector(didTappedTextView)
-        )
-        textView.addGestureRecognizer(touchUpInside)
     }
 
     /// 뷰 구성
@@ -154,7 +148,8 @@ extension DetailViewController: DetailProtocol {
 
         countLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(spacing)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(spacing)
+            $0.height.equalTo(30.0)
         }
     }
 
@@ -167,7 +162,7 @@ extension DetailViewController: DetailProtocol {
         }
 
         textView.text = memo.content
-        countLabel.text = "\(memo.content.count)"
+        countLabel.text = "글자수 : \(memo.content.count)"
     }
 
     /// 폰트 적용
@@ -199,14 +194,6 @@ extension DetailViewController: DetailProtocol {
         let saveAlertViewController = SaveAlertViewController()
         saveAlertViewController.modalPresentationStyle = .overCurrentContext
         present(saveAlertViewController, animated: false)
-    }
-
-    /// 메모 수정 화면 보여주기
-    func showWriteViewController(_ memo: Memo) {
-        let writeViewController = WriteViewController(isEditing: true, memo: memo)
-        writeViewController.modalPresentationStyle = .fullScreen
-        show(writeViewController, sender: nil)
-//        present(writeViewController, animated: false)
     }
 
     /// 자물쇠 버튼 업데이트
@@ -251,14 +238,12 @@ extension DetailViewController: DetailProtocol {
     }
 
     /// 키보드 높이만큼 올리거나 내리기
-    func keyboardHeightUpDown(_ keyboardHeight: CGFloat, isUp: Bool) {
+    func keyboardUpOrDown(_ keyboardHeight: CGFloat, isUp: Bool) {
         UIView.animate(withDuration: 1) {
-            self.countLabel.snp.makeConstraints {
-                if isUp {
-                    $0.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(keyboardHeight)
-                } else {
-                    $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
-                }
+            if isUp {
+                self.view.frame.size.height -= keyboardHeight
+            } else {
+                self.view.frame.size.height += keyboardHeight
             }
         }
     }
@@ -281,7 +266,7 @@ extension DetailViewController {
         presenter.didTappedSaveRightBarButton(textView.text)
     }
 
-    /// 자물쇠 버튼 클릭 -> 현재 상태 Toast 알림으로 띄워주기
+    /// 자물쇠 버튼 클릭 -> 일반-비밀 메모 변경하기
     @objc func didTappedLockRightBarButton() {
         presenter.didTappedLockRightBarButton()
     }
@@ -294,11 +279,6 @@ extension DetailViewController {
     /// 암호 입력했다는 노티
     @objc func inputPasswordNoti(_ notification: Notification) {
         presenter.inputPasswordNoti(notification)
-    }
-
-    /// 메모 클릭 -> 수정 화면 띄우기
-    @objc func didTappedTextView() {
-        presenter.didTappedTextView()
     }
 
     /// 키보드 올라올 때 받는 노티
