@@ -52,6 +52,9 @@ final class WritePresenter: NSObject {
         viewController?.setupGesture()
         viewController?.setupView(isEditing, memo)
         viewController?.applyFont()
+        viewController?.updateTextView()
+        // textView에 글 작성될 때마다 updateTextView()하니까 커서가 이상하게 보임.
+        // 그렇다고 viewDidLoad에서 실행하면 적용안됨.
     }
 
     func didTappedLeftBarButton(_ textCount: Int) {
@@ -127,6 +130,5 @@ final class WritePresenter: NSObject {
 extension WritePresenter: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         viewController?.updateTextCount(textView.text.count)
-        viewController?.updateTextView()
     }
 }

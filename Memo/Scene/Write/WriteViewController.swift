@@ -194,7 +194,7 @@ extension WriteViewController: WriteProtocol {
     func updateTextView() {
         let attrString = NSMutableAttributedString(string: textView.text!)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 20
+        paragraphStyle.lineSpacing = 10
 
         attrString.addAttribute(
             NSAttributedString.Key.paragraphStyle,
