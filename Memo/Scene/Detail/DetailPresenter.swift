@@ -13,13 +13,13 @@ protocol DetailProtocol: AnyObject {
     func setupNoti()
     func setupGesture()
     func setupView(_ memo: Memo)
-    func applyFont()
 
     func popViewController()
     func showDetailPopupViewController(_ popoverContentController: DetailPopupViewController)
     func pushToWriteViewController()
     func showDeleteAlertViewController()
     func showToast(_ isSecret: Bool)
+    func updateTextView()
 }
 
 final class DetailPresenter: NSObject {
@@ -43,7 +43,7 @@ final class DetailPresenter: NSObject {
         viewController?.setupNoti()
         viewController?.setupGesture()
         viewController?.setupView(memo)
-        viewController?.applyFont()
+        viewController?.updateTextView()
     }
 
     func didTappedLeftBarButton() {

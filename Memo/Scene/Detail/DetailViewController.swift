@@ -12,6 +12,7 @@ import UIKit
 
 final class DetailViewController: UIViewController {
     private var presenter: DetailPresenter!
+    private let font = FontManager.getFont()
 
     init(memo: Memo) {
         super.init(nibName: nil, bundle: nil)
@@ -119,13 +120,6 @@ extension DetailViewController: DetailProtocol {
         }
     }
 
-    /// 폰트 적용
-    func applyFont() {
-        let font = FontManager.getFont()
-
-        textView.font = font.largeFont
-    }
-
     /// 현재 뷰 pop
     func popViewController() {
         navigationController?.popViewController(animated: true)
@@ -162,6 +156,22 @@ extension DetailViewController: DetailProtocol {
         } else {
             view.makeToast("수정 화면에서 비밀 메모로 변경하실 수 있습니다.", style: style)
         }
+    }
+
+    /// TextView 스타일 업데이트
+    func updateTextView() {
+        let attrString = NSMutableAttributedString(string: textView.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
+
+        attrString.addAttribute(
+            NSAttributedString.Key.paragraphStyle,
+            value: paragraphStyle,
+            range: NSRange(location: 0, length: attrString.length)
+        )
+        textView.attributedText = attrString
+        textView.font = font.largeFont
+        textView.textColor = .label
     }
 }
 
