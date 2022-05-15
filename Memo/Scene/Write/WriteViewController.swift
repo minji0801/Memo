@@ -11,6 +11,7 @@ import UIKit
 
 final class WriteViewController: UIViewController {
     private var presenter: WritePresenter!
+    private let font = FontManager.getFont()
 
     init(isEditing: Bool, memo: Memo) {
         super.init(nibName: nil, bundle: nil)
@@ -136,9 +137,7 @@ extension WriteViewController: WriteProtocol {
 
     /// 폰트 적용
     func applyFont() {
-        let font = FontManager.getFont()
-
-        textView.font = font.largeFont
+//        textView.font = font.largeFont
         countLabel.font = font.mediumFont
     }
 
@@ -189,6 +188,22 @@ extension WriteViewController: WriteProtocol {
         } else {
             lockRightBarButton.image = UIImage(systemName: "lock")
         }
+    }
+
+    /// TextView 스타일 업데이트
+    func updateTextView() {
+        let attrString = NSMutableAttributedString(string: textView.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
+
+        attrString.addAttribute(
+            NSAttributedString.Key.paragraphStyle,
+            value: paragraphStyle,
+            range: NSRange(location: 0, length: attrString.length)
+        )
+        textView.attributedText = attrString
+        textView.font = font.largeFont
+        textView.textColor = .label
     }
 }
 
