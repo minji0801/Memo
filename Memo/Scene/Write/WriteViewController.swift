@@ -112,7 +112,7 @@ extension WriteViewController: WriteProtocol {
 
         if isEditing {
             textView.text = memo.content
-            countLabel.text = "\(memo.content.count)"
+            countLabel.text = "글자수 : \(memo.content.count)"
             updateLockButton(memo.isSecret)
         }
 
@@ -179,7 +179,7 @@ extension WriteViewController: WriteProtocol {
 
     /// 글자 수 업데이트
     func updateTextCount(_ count: Int) {
-        countLabel.text = "\(count)"
+        countLabel.text = "글자수 : \(count)"
     }
 
     /// 자물쇠 버튼 업데이트
